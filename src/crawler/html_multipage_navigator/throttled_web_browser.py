@@ -5,7 +5,7 @@ class ThrottledWebBrowserWrapper(AbstractWebBrowser):
 	def __init__(self, browser, token_bucket):
 		"""
 		@type browser: L{AbstractWebBrowser}
-		@type token_bucket: L{TockenBucket}
+		@type token_bucket: L{TokenBucket}
 		"""
 		self.__br = browser
 		self.__token_bucket = token_bucket		

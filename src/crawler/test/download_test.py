@@ -1,10 +1,10 @@
-import sys
+#import sys
 import unittest
-import os.path
+#import os.path
 import time
 import logging
 
-from common.logger import Logger
+#from common.logger import Logger
 from common.resources import Resources
 from common.dir_tree_comparer import are_dir_trees_equal
 from common.tempdir import TempDir
@@ -22,6 +22,7 @@ from crawler.html_multipage_navigator.sample_page_analyzer import \
 from crawler.crawler_thread import CrawlerThread
 from crawler.navigator_tree_wrapper import NavigatorTreeWrapper
 from crawler.abstract_node import NodeState
+from crawler.crawler_program import CrawlerProgram
 
 class DownloadTestCase(unittest.TestCase):
 	def test_single_threaded_download_without_manager(self):
@@ -31,9 +32,9 @@ class DownloadTestCase(unittest.TestCase):
 			analyzer_factory = PageAnalyzerFactory(temp_dir.get_path())
 			address = "file://"+\
 				Resources.path(__file__, "data/original_site/issues_1.html")
-			tree = TreeAccessor(_StandardNodeMock())
+			tree = TreeAccessor(_StandardNodeExtended())
 			navigator = HTMLMultipageNavigator(analyzer_factory, address)
-			navigator_wrapper = _NavigatorTreeWrapperMock(navigator, tree)
+			navigator_wrapper = _NavigatorTreeWrapperExtended(navigator, tree)
 			crawler = CrawlerThread(navigator_wrapper, tree)
 			crawler.run()
 			expected_dir = Resources.path(__file__, "data/expected_download")
@@ -103,7 +104,7 @@ class DownloadTestCase(unittest.TestCase):
 			self.assert_(time_taken[0] > 2*time_taken[1], assert_str)
 #		Logger.stop()
 
-	def __check_download(self, 
+	def __check_download(self,
 			threads_no, address, max_page_opens_per_second=None):
 		"""@return: run time in seconds"""
 #		temp_dir = TempDir(os.path.expanduser("~/tmp"), prefix="dfs_crawler-")
@@ -119,23 +120,21 @@ class DownloadTestCase(unittest.TestCase):
 			analyzer_factory = PageAnalyzerFactory(
 				temp_dir.get_path(), token_bucket)
 			
-			tree = TreeAccessor(_StandardNodeMock())
 			navigators = []
 			for _ in xrange(threads_no):
-				navigator = _NavigatorTreeWrapperMock(
-					HTMLMultipageNavigator(analyzer_factory, address), tree)
-				navigators.append(navigator)
-			manager = CrawlersManager(tree, navigators)
+				navigators.append(HTMLMultipageNavigator(
+					analyzer_factory, address))
+			sentinel = _StandardNodeExtended()
+			crawler = _CrawlerProgramExtended(navigators, sentinel)
 			start = time.time()
-			manager.start()
-			manager.wait_until_finish()
+			crawler.run()
 			end = time.time()
 			expected_dir = Resources.path(__file__, "data/expected_download")
 			actual_dir = temp_dir.get_path()
 			self.assert_(are_dir_trees_equal(expected_dir, actual_dir))
-			self.__check_tree_final_state(tree.get_root())
+			self.__check_tree_final_state(sentinel.get_child("root"))
 			self.__check_if_each_node_is_processed_once(
-				tree.get_root(), {"/root/2011-07-16/06": 0})
+				sentinel.get_child("root"), {"/root/2011-07-16/06": 0})
 			if max_page_opens_per_second is not None:
 				token_filler.stop()
 			return end - start
@@ -185,7 +184,7 @@ class DownloadTestCase(unittest.TestCase):
 		expected_count = 1
 		if path in exception_nodes:
 			expected_count = exception_nodes[path]
-		assert isinstance(node, _StandardNodeMock)
+		assert isinstance(node, _StandardNodeExtended)
 		self.assertEqual(expected_count, node.processed_times)
 		children_names = [ch.get_name() for ch in node.get_children()]
 		for child_name in children_names:
@@ -194,21 +193,37 @@ class DownloadTestCase(unittest.TestCase):
 			self.__check_if_each_node_in_subtree_is_processed_once(child_path, 
 				child, exception_nodes)
 
-class _StandardNodeMock(StandardNode):
+class _StandardNodeExtended(StandardNode):
 	def __init__(self, parent=None, name="sentinel", state=NodeState.OPEN):
 		StandardNode.__init__(self, parent=parent, name=name, state=state)
 		self.processed_times = 0
 	
 	def add_child(self, name, state):
 		assert name not in self._children[state]
-		new_child = _StandardNodeMock(self, name, state)
+		new_child = _StandardNodeExtended(self, name, state)
 		self._children[state][name] = new_child
 		return new_child
 
-class _NavigatorTreeWrapperMock(NavigatorTreeWrapper):
+class _NavigatorTreeWrapperExtended(NavigatorTreeWrapper):
 	def __init__(self, navigator, tree):
 		NavigatorTreeWrapper.__init__(self, navigator, tree)
 	
 	def process_node_and_check_if_is_leaf(self):
 		self.get_current_node().processed_times += 1
 		return NavigatorTreeWrapper.process_node_and_check_if_is_leaf(self)
+
+class _CrawlerProgramExtended(CrawlerProgram):
+		def __init__(self, navigators, sentinel, activity_schedule=None,  
+			log_file_path=None, state_file_path=None, save_period=None,
+			logging_level=logging.ERROR):
+			CrawlerProgram.__init__(self, navigators, sentinel, 
+				activity_schedule, log_file_path, state_file_path, 
+				save_period, logging_level)
+
+		def _create_crawlers_manager(self, tree, navigators):
+			navigator_wrappers = []
+			for navigator in navigators:
+				navigator_wrapper = \
+					_NavigatorTreeWrapperExtended(navigator, tree)
+				navigator_wrappers.append(navigator_wrapper)
+			return CrawlersManager(tree, navigator_wrappers)

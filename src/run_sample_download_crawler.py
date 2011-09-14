@@ -3,6 +3,15 @@
 import sys
 import os
 import os.path
+import datetime
 
 script_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
-os.system('python {script_dir}/sample_download_crawler.py -V --log "{script_dir}/../tmp/log.txt" --pages_download_limit 10 "file://{script_dir}/crawler/test/data/original_site/issues_1.html" "{script_dir}/../tmp/download" "{script_dir}/../tmp/state.xml"'.format(script_dir=script_dir))
+now = datetime.datetime.now()
+sleep_time = (now + datetime.timedelta(seconds=4), 
+	now + datetime.timedelta(seconds=9))
+sleep_time_str = ("{}:{}:{}".format(sleep_time[0].hour, sleep_time[0].minute, sleep_time[0].second), 
+	"{}:{}:{}".format(sleep_time[1].hour, sleep_time[1].minute, sleep_time[1].second))
+pages_per_second_download_limit = 4
+
+os.system('python {script_dir}/sample_download_crawler.py -V --log "{script_dir}/../tmp/log.txt" --pages_per_second_download_limit {download_limit} --daily_schedule {activity_start}-{activity_end} "file://{script_dir}/crawler/test/data/original_site/issues_1.html" "{script_dir}/../tmp/download" "{script_dir}/../tmp/state.xml"'.format(download_limit=pages_per_second_download_limit, script_dir=script_dir, activity_start=sleep_time_str[1], activity_end=sleep_time_str[0]))
+print "\nThe information above about problems during tree exploration, that is printed after the program execution, is expected. It stems from the fact that some of the pages we want to download from our testing web site are missing."

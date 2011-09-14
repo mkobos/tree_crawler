@@ -1,6 +1,13 @@
 #!/usr/bin/env python
 
+"""
+This script is responsible for initialization and of the crawler for a task of
+downloading a sample web page. It also handles user command-line interface
+of the program.
+"""
+
 import logging
+import datetime
 from optparse import OptionParser
 import os.path
 
@@ -13,13 +20,16 @@ from crawler.html_multipage_navigator.sample_page_analyzer import \
 from crawler.abstract_node import NodeState
 from crawler.crawler_program import CrawlerProgram
 from common.threads.token_bucket import TokenBucketFiller, StandardTokenBucket
+from common.activity_schedule import DaySchedule, AlwaysActiveSchedule
 
 __default_threads_no_string = '2'
 __save_period = 0.1
 
 def parse():
 	usage="usage: %prog [-t DOWNLOAD_THREADS_NO] [-l LOG_FILE] "\
-		"[--verbose] [--very_verbose] [--pages_download_limit]"\
+		"[--verbose] [--very_verbose] "\
+		"[--pages_per_second_download_limit NUMBER] "\
+		"[--daily_schedule START_TIME-END_TIME] "\
 		"SOURCE_ADDRESS DESTINATION_DIR STATE_FILE"
 	parser=OptionParser(usage=usage)
 	parser.add_option('-t', '--threads', dest='threads_no', type='int',
@@ -37,17 +47,56 @@ def parse():
 		help='If this options is set, the logging information '
 			'will not only be printed to standard output, but '
 			'also to selected log file.')
-	parser.add_option('-d', '--pages_download_limit', 
+	parser.add_option('-d', '--pages_per_second_download_limit', 
 		dest='pages_download_limit',
 		action='store', default=None,
 		help='Maximal number of web pages downloads per second. '
 		'By default no limit is imposed.')
+	parser.add_option('-s', '--daily_schedule', 
+		dest='daily_schedule', action='store', default=None,
+		help='Every day start and stop times of the download in form of '
+			'"start_time-end_time" eg. "12:30-16:45" or "12-12:30:55". '
+			'If this option is not set, '\
+			'no download schedule is used and the program works '\
+			'until it finishes downloading.')
 	(options, args)=parser.parse_args()
 	expected_args_no = 3
 	if len(args) != expected_args_no:
 		parser.error("incorrect number of arguments"
 			"(got {} and {} expected)".format(len(args), expected_args_no))
 	return (options, args)
+
+class TimeParser:
+	@staticmethod
+	def parse_time(string):
+		elems = string.split(":")
+		if len(elems) == 1:
+			return datetime.time(hour=int(elems[0]))
+		if len(elems) == 2:
+			return datetime.time(hour=int(elems[0]), minute=int(elems[1]))
+		if len(elems) == 3:
+			return datetime.time(hour=int(elems[0]), 
+				minute=int(elems[1]), second=int(elems[2]))
+		raise Exception("Not supported time format \"{}\"".format(string))
+	
+	@staticmethod
+	def parse_time_interval(string):
+		"""
+		Parse time interval string of format eg. '04:56:04-12:44'
+		
+		@return: (start, end), where both values are of type C{date.datetime}
+		"""
+		parts = string.split("-")
+		start_time = TimeParser.parse_time(parts[0])
+		end_time = TimeParser.parse_time(parts[1])
+		return (start_time, end_time)
+
+def get_schedule(schedule_string):
+	if schedule_string is not None:
+		start_time, end_time = TimeParser.parse_time_interval(schedule_string)	
+		return DaySchedule(start_time, end_time)
+	else:
+		return AlwaysActiveSchedule()
 
 def get_tree_summary(root, state_file_path, log_file_path):
 	msg = "Summary of the run:\n"
@@ -81,11 +130,12 @@ def main():
 	threads_no = int(options.threads_no)
 	logging_level = get_logging_level(options)
 	log_file_path = options.log_file
+	schedule = get_schedule(options.daily_schedule)
 	lenient_makedir(destination_dir)
 	
 	pages_download_limit_per_second = None
 	if options.pages_download_limit is not None:
-		pages_download_limit_per_second = int(options.pages_download_limit)
+		pages_download_limit_per_second = float(options.pages_download_limit)
 	token_bucket = None
 	token_filler = None
 	if pages_download_limit_per_second is not None:
@@ -100,10 +150,13 @@ def main():
 		navigators.append(
 			HTMLMultipageNavigator(analyzer_factory, source_address))
 	sentinel = StandardNode()
-	prog = CrawlerProgram(navigators, sentinel, 
-			log_file_path, state_file_path, __save_period, logging_level)
+	prog = CrawlerProgram(navigators, sentinel, schedule,
+		log_file_path, state_file_path, __save_period, logging_level)
 	print "Starting download with {} threads from address \"{}\" to "\
 		"directory \"{}\"".format(threads_no, source_address, destination_dir)
+	print "Activity daily schedule: {}, "\
+		"pages download limit per second: {}".format(
+			options.daily_schedule, pages_download_limit_per_second)
 	prog.run()
 	root = sentinel.get_child("root")
 	
