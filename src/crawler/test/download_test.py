@@ -22,7 +22,7 @@ from crawler.html_multipage_navigator.sample_page_analyzer import \
 from crawler.crawler_thread import CrawlerThread
 from crawler.navigator_tree_wrapper import NavigatorTreeWrapper
 from crawler.abstract_node import NodeState
-from crawler.crawler_program import CrawlerProgram
+from crawler.crawler_program import MultithreadedCrawler
 
 class DownloadTestCase(unittest.TestCase):
 	def test_single_threaded_download_without_manager(self):
@@ -125,7 +125,7 @@ class DownloadTestCase(unittest.TestCase):
 				navigators.append(HTMLMultipageNavigator(
 					analyzer_factory, address))
 			sentinel = _StandardNodeExtended()
-			crawler = _CrawlerProgramExtended(navigators, sentinel)
+			crawler = _MultithreadedCrawlerExtended(navigators, sentinel)
 			start = time.time()
 			crawler.run()
 			end = time.time()
@@ -212,11 +212,11 @@ class _NavigatorTreeWrapperExtended(NavigatorTreeWrapper):
 		self.get_current_node().processed_times += 1
 		return NavigatorTreeWrapper.process_node_and_check_if_is_leaf(self)
 
-class _CrawlerProgramExtended(CrawlerProgram):
+class _MultithreadedCrawlerExtended(MultithreadedCrawler):
 		def __init__(self, navigators, sentinel, activity_schedule=None,  
 			log_file_path=None, state_file_path=None, save_period=None,
 			logging_level=logging.ERROR):
-			CrawlerProgram.__init__(self, navigators, sentinel, 
+			MultithreadedCrawler.__init__(self, navigators, sentinel, 
 				activity_schedule, log_file_path, state_file_path, 
 				save_period, logging_level)
 

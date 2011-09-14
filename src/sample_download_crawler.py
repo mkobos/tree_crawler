@@ -18,7 +18,7 @@ from crawler.standard_node import StandardNode
 from crawler.html_multipage_navigator.sample_page_analyzer import \
 	PageAnalyzerFactory
 from crawler.abstract_node import NodeState
-from crawler.crawler_program import CrawlerProgram
+from crawler.crawler_program import MultithreadedCrawler
 from common.threads.token_bucket import TokenBucketFiller, StandardTokenBucket
 from common.activity_schedule import DaySchedule, AlwaysActiveSchedule
 
@@ -82,7 +82,7 @@ class TimeParser:
 	@staticmethod
 	def parse_time_interval(string):
 		"""
-		Parse time interval string of format eg. '04:56:04-12:44'
+		Parse time interval string of format e.g. '04:56:04-12:44'
 		
 		@return: (start, end), where both values are of type C{date.datetime}
 		"""
@@ -150,7 +150,7 @@ def main():
 		navigators.append(
 			HTMLMultipageNavigator(analyzer_factory, source_address))
 	sentinel = StandardNode()
-	prog = CrawlerProgram(navigators, sentinel, schedule,
+	prog = MultithreadedCrawler(navigators, sentinel, schedule,
 		log_file_path, state_file_path, __save_period, logging_level)
 	print "Starting download with {} threads from address \"{}\" to "\
 		"directory \"{}\"".format(threads_no, source_address, destination_dir)

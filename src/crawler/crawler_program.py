@@ -13,7 +13,7 @@ from crawler.tree_saver_thread import TreeSaverThread
 from crawler.abstract_node import NodeState
 from crawler.xml_tree_serialization import XMLTreeReader
 
-class CrawlerProgram:
+class MultithreadedCrawler:
 	"""
 	A program that runs several threads to crawl the tree.
 	
@@ -140,11 +140,12 @@ class CrawlerProgram:
 		with open(file_path) as f:
 			reader = XMLTreeReader(f)
 			reader.read(sentinel)
-		CrawlerProgram.__change_state_from_PROCESSING_to_OPEN(sentinel.get_child("root"))
+		MultithreadedCrawler.__change_state_from_PROCESSING_to_OPEN(
+			sentinel.get_child("root"))
 	
 	@staticmethod
 	def __change_state_from_PROCESSING_to_OPEN(node):
 		if node.get_state() == NodeState.PROCESSING:
 			node.set_state(NodeState.OPEN)
 		for child in node.get_children():
-			CrawlerProgram.__change_state_from_PROCESSING_to_OPEN(child)
+			MultithreadedCrawler.__change_state_from_PROCESSING_to_OPEN(child)

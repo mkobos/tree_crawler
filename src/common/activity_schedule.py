@@ -47,8 +47,7 @@ class DaySchedule(AbstractActivitySchedule):
 	def __get_closest_event_interval(self, now):
 		"""
 		Return current event interval (if C{now} lies in event interval) or 
-			future closest event interval 
-			(if C{now} doesn't lie in event interval)
+		future closest event interval (if C{now} doesn't lie in event interval)
 		
 		@param now: current time (L{datetime.datetime})
 		@return: (start, end), where both values are of type 
