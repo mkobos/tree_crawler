@@ -4,8 +4,6 @@ from crawler.html_multipage_navigator.tree_navigator import \
 	HTMLMultipageNavigator
 from crawler.html_multipage_navigator.sample_page_analyzer import *
 
-##TODO: rename this file to  `tree_navigator_test.py`
-
 class HTMLMultipageNavigatorTestCase(unittest.TestCase):
 	def test_simple_browsing(self):
 		navigator = HTMLMultipageNavigator("file://"+Resources.path(__file__, 
