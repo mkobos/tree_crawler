@@ -126,6 +126,20 @@ def get_logging_level(options):
 		log_level = logging.DEBUG
 	return log_level
 
+def get_token_filler_and_browser_creator(pages_download_limit_per_second):
+	token_filler = None
+	browser_creator = None
+	if pages_download_limit_per_second is not None:
+		token_bucket = StandardTokenBucket(pages_download_limit_per_second)
+		browser_creator = ThrottledWebBrowserCreator(
+			MechanizeBrowserCreator(), token_bucket)
+		token_filler = TokenBucketFiller(token_bucket, 1, 
+			pages_download_limit_per_second)
+		token_filler.start()
+	else:
+		browser_creator = MechanizeBrowserCreator()
+	return (token_filler, browser_creator)
+
 def main():
 	(options, args) = parse()
 	(source_address, destination_dir, state_file_path) = args
@@ -138,17 +152,8 @@ def main():
 	pages_download_limit_per_second = None
 	if options.pages_download_limit is not None:
 		pages_download_limit_per_second = float(options.pages_download_limit)
-	token_filler = None
-	browser_creator = None
-	if pages_download_limit_per_second is not None:
-		token_bucket = StandardTokenBucket(pages_download_limit_per_second)
-		browser_creator = ThrottledWebBrowserCreator(
-			MechanizeBrowserCreator(), token_bucket)
-		token_filler = TokenBucketFiller(token_bucket, 1, 
-			pages_download_limit_per_second)
-		token_filler.start()
-	else:
-		browser_creator = MechanizeBrowserCreator()
+	(token_filler, browser_creator) = \
+		get_token_filler_and_browser_creator(pages_download_limit_per_second)
 
 	navigators = []
 	for _ in range(threads_no):
@@ -166,7 +171,7 @@ def main():
 	prog.run()
 	root = sentinel.get_child("root")
 	
-	if pages_download_limit_per_second is not None:
+	if token_filler is not None:
 		token_filler.stop()
 	
 	print "Done.\n"

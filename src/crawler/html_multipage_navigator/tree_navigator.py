@@ -7,6 +7,17 @@ from crawler.abstract_tree_navigator import AbstractTreeNavigator, \
 from crawler.html_multipage_navigator.web_browser import MechanizeBrowserCreator
 
 class HTMLMultipageNavigator(AbstractTreeNavigator):
+	"""
+	A web site tree navigator. 
+	
+	It is assumed that all web pages corresponding	to the nodes of the tree on 
+	the given level all have the same basic	characteristics and are analyzed 
+	in the same way, namely by the same object of a subclass of 
+	L{AbstractPageAnalyzer}. In particular, all of the leaf web pages are all 
+	placed on the same level of the tree. Some of the parts of the tree might
+	be missing, which results marking the certain nodes of the tree as ERROR.
+	"""
+	
 	__repetition_suffix_template = "-repetition_{}"
 	__generate_new_name_max_repetitions = int(10e4)
 
