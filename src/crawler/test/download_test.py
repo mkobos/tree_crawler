@@ -18,7 +18,10 @@ from crawler.html_multipage_navigator.tree_navigator import \
 from crawler.tree_accessor import TreeAccessor
 from crawler.standard_node import StandardNode
 from crawler.html_multipage_navigator.sample_page_analyzer import \
-	PageAnalyzerFactory
+	LevelsCreator
+from crawler.html_multipage_navigator.web_browser import MechanizeBrowserCreator
+from crawler.html_multipage_navigator.throttled_web_browser import \
+	ThrottledWebBrowserCreator
 from crawler.crawler_thread import CrawlerThread
 from crawler.navigator_tree_wrapper import NavigatorTreeWrapper
 from crawler.abstract_node import NodeState
@@ -29,11 +32,11 @@ class DownloadTestCase(unittest.TestCase):
 #		temp_dir = TempDir(os.path.expanduser("~/tmp"), prefix="dfs_crawler-")
 #		try:
 		with TempDir() as temp_dir:
-			analyzer_factory = PageAnalyzerFactory(temp_dir.get_path())
+			levels = LevelsCreator.create(temp_dir.get_path())
 			address = "file://"+\
 				Resources.path(__file__, "data/original_site/issues_1.html")
 			tree = TreeAccessor(_StandardNodeExtended())
-			navigator = HTMLMultipageNavigator(analyzer_factory, address)
+			navigator = HTMLMultipageNavigator(address, levels)
 			navigator_wrapper = _NavigatorTreeWrapperExtended(navigator, tree)
 			crawler = CrawlerThread(navigator_wrapper, tree)
 			crawler.run()
@@ -110,20 +113,23 @@ class DownloadTestCase(unittest.TestCase):
 #		temp_dir = TempDir(os.path.expanduser("~/tmp"), prefix="dfs_crawler-")
 #		try:
 		with TempDir() as temp_dir:
-			token_bucket = None
 			token_filler = None
+			browser_creator = None
 			if max_page_opens_per_second is not None:
+				token_bucket = None
 				token_bucket = StandardTokenBucket(max_page_opens_per_second)
 				token_filler = TokenBucketFiller(token_bucket, 1, 
 					max_page_opens_per_second)
 				token_filler.start()
-			analyzer_factory = PageAnalyzerFactory(
-				temp_dir.get_path(), token_bucket)
+				browser_creator = ThrottledWebBrowserCreator(
+					MechanizeBrowserCreator(), token_bucket)
+			else:
+				browser_creator = MechanizeBrowserCreator()
 			
 			navigators = []
 			for _ in xrange(threads_no):
-				navigators.append(HTMLMultipageNavigator(
-					analyzer_factory, address))
+				navigators.append(HTMLMultipageNavigator(address,
+					LevelsCreator.create(temp_dir.get_path()), browser_creator))
 			sentinel = _StandardNodeExtended()
 			crawler = _MultithreadedCrawlerExtended(navigators, sentinel)
 			start = time.time()

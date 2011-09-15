@@ -12,11 +12,13 @@ from optparse import OptionParser
 import os.path
 
 from common.file_helper import lenient_makedir
+from crawler.standard_node import StandardNode
+from crawler.html_multipage_navigator.sample_page_analyzer import LevelsCreator
 from crawler.html_multipage_navigator.tree_navigator import \
 	HTMLMultipageNavigator
-from crawler.standard_node import StandardNode
-from crawler.html_multipage_navigator.sample_page_analyzer import \
-	PageAnalyzerFactory
+from crawler.html_multipage_navigator.web_browser import MechanizeBrowserCreator
+from crawler.html_multipage_navigator.throttled_web_browser import \
+	ThrottledWebBrowserCreator
 from crawler.abstract_node import NodeState
 from crawler.crawler_program import MultithreadedCrawler
 from common.threads.token_bucket import TokenBucketFiller, StandardTokenBucket
@@ -136,19 +138,23 @@ def main():
 	pages_download_limit_per_second = None
 	if options.pages_download_limit is not None:
 		pages_download_limit_per_second = float(options.pages_download_limit)
-	token_bucket = None
 	token_filler = None
+	browser_creator = None
 	if pages_download_limit_per_second is not None:
 		token_bucket = StandardTokenBucket(pages_download_limit_per_second)
+		browser_creator = ThrottledWebBrowserCreator(
+			MechanizeBrowserCreator(), token_bucket)
 		token_filler = TokenBucketFiller(token_bucket, 1, 
 			pages_download_limit_per_second)
 		token_filler.start()
+	else:
+		browser_creator = MechanizeBrowserCreator()
 
-	analyzer_factory = PageAnalyzerFactory(destination_dir, token_bucket)
 	navigators = []
 	for _ in range(threads_no):
 		navigators.append(
-			HTMLMultipageNavigator(analyzer_factory, source_address))
+			HTMLMultipageNavigator(source_address, 
+				LevelsCreator.create(destination_dir), browser_creator))
 	sentinel = StandardNode()
 	prog = MultithreadedCrawler(navigators, sentinel, schedule,
 		log_file_path, state_file_path, __save_period, logging_level)

@@ -1,5 +1,5 @@
-from crawler.html_multipage_navigator.web_browser import AbstractWebBrowser
-from common.threads.token_bucket import TokenBucket
+from crawler.html_multipage_navigator.web_browser import AbstractWebBrowser, \
+	AbstractWebBrowserCreator
 
 class ThrottledWebBrowserWrapper(AbstractWebBrowser):
 	def __init__(self, browser, token_bucket):
@@ -19,3 +19,17 @@ class ThrottledWebBrowserWrapper(AbstractWebBrowser):
 	
 	def back(self, steps=1):
 		self.__br.back(steps)
+
+class ThrottledWebBrowserCreator(AbstractWebBrowserCreator):
+	def __init__(self, browser_creator, token_bucket):
+		"""
+		@param browser_creator: a creator of browsers that will be throttled
+		@type browser_creator: L{AbstractWebBrowserCreator}
+		@type token_bucket: L{TokenBucket}
+		"""
+		self.__browser_creator = browser_creator
+		self.__token_bucket = token_bucket
+	
+	def create(self):
+		bare_browser = self.__browser_creator.create()
+		return ThrottledWebBrowserWrapper(bare_browser, self.__token_bucket)

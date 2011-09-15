@@ -6,17 +6,16 @@ from common.dir_tree_comparer import are_dir_trees_equal
 from crawler.simple_dfs_crawler import SimpleDFSCrawler
 from crawler.html_multipage_navigator.tree_navigator import \
 	HTMLMultipageNavigator
-from crawler.html_multipage_navigator.sample_page_analyzer import \
-	PageAnalyzerFactory
+from crawler.html_multipage_navigator.sample_page_analyzer import LevelsCreator
 from common.tempdir import TempDir
 
 class SimpleDFSCrawlerTestCase(unittest.TestCase):
 	def test_website_download(self):
 		with TempDir() as temp_dir:
-			analyzer_factory = PageAnalyzerFactory(temp_dir.get_path())
+			levels = LevelsCreator.create(temp_dir.get_path())
 			address = "file://"+Resources.path(__file__, 
 				"data/original_site-without_broken_links/issues_1.html")
-			navigator = HTMLMultipageNavigator(analyzer_factory, address)
+			navigator = HTMLMultipageNavigator(address, levels)
 			crawler = SimpleDFSCrawler(navigator)
 			crawler.run()
 			expected_dir = Resources.path(__file__, 

@@ -4,31 +4,41 @@ from collections import deque
 
 from crawler.abstract_tree_navigator import AbstractTreeNavigator, \
 	NavigationException
+from crawler.html_multipage_navigator.web_browser import MechanizeBrowserCreator
 
 class HTMLMultipageNavigator(AbstractTreeNavigator):
 	__repetition_suffix_template = "-repetition_{}"
 	__generate_new_name_max_repetitions = int(10e4)
 
-	def __init__(self, page_analyzer_factory, address):
+	def __init__(self, address, levels, browser_creator=None):
 		"""
-		@type page_analyzer_factory: L{AbstractPageAnalyzerFactory}
+		@param browser_creator: a creator of browsers that will be used
+			while crawling the web site. The default browser used here 
+			is L{MechanizeBrowser}.
+		@type browser_creator: L{AbstractWebBrowserCreator}
+		@param levels: list of L{Level} objects. The first element is a level 
+			corresponding to the root node, the last one corresponds to
+			leafs level.
 		@param address: URL address string
 		"""
 		self.__address = address
-		self.__page_analyzer_factory = page_analyzer_factory
+		self.__browser_creator = browser_creator
+		if browser_creator is None:
+			self.__browser_creator = MechanizeBrowserCreator()
 		self.__br = None
-		self.__levels = page_analyzer_factory.create_page_analyzers()
+		self.__levels = levels
 		self.__path = None
 		self.__children_history = None
 		self.__current_children = None
 		"""
 		Info about children on current level of tree structure.
 		L{OrderedDictionary} with the key as child name and the value 
-		as a link to child webpage.
+		as a link to child web page.
 		"""
 
 	def start_in_root(self):
-		self.__br = self.__page_analyzer_factory.create_browser(self.__address)
+		self.__br = self.__browser_creator.create()
+		self.__br.open(self.__address)
 		self.__path = [self.__levels[0].name]
 		self.__children_history = _ChildrenHistory()
 		self.__current_children = self.__get_current_children()
