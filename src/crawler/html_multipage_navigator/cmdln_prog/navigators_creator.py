@@ -17,10 +17,8 @@ class CmdLnNavigatorsCreator(AbstractCmdLnNavigatorsCreator):
 		self.__levels_creator = levels_creator
 	
 	def fill_parser(self, parser):
-		parser.add_argument("source_addres", 
+		parser.add_argument("source_address", 
 			help="the address of the web site to crawl.")
-		parser.add_argument("destination_dir",
-			help="directory where the downloaded pages will be saved.")
 		parser.add_argument("--max_pages_per_second", type=float, 
 			help="Maximal number of web pages downloads per second. "\
 				"By default no limit is imposed.")

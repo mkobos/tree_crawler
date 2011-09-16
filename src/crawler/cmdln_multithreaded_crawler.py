@@ -5,13 +5,13 @@ import argparse
 
 from crawler.standard_node import StandardNode
 from crawler.abstract_node import NodeState
-from crawler.crawler_program import MultithreadedCrawler
+from crawler.multithreaded_crawler import MultithreadedCrawler
 from common.activity_schedule import DaySchedule, AlwaysActiveSchedule
 
-__default_threads_no = 2
-__save_period = 0.1
-
 class CmdLnMultithreadedCrawler:
+	__default_threads_no = 2
+	__save_period = 0.1
+	
 	def __init__(self, navigators_creator):
 		"""@type navigators_creator: L{AbstractCmdLnNavigatorsCreator}"""
 		self.__navigators_creator = navigators_creator
@@ -21,8 +21,9 @@ class CmdLnMultithreadedCrawler:
 		parser.add_argument("state_file", 
 			help="Path to file where the state of the algorithm is saved.")
 		parser.add_argument("--threads", type=int,
-			default=__default_threads_no, help="number of crawler threads")
-		parser.add_argument("-v", "--verbose", action="append_const",
+			default=self.__default_threads_no, help="number of crawler threads")
+		parser.add_argument("-v", "--verbose", action="append_const", 
+			const=None,
 			help="If used once, shows warnings while running the program; "
 			"if used twice, shows debug info while running the program.")
 		parser.add_argument("--log_file", 
@@ -88,7 +89,7 @@ class CmdLnMultithreadedCrawler:
 
 		sentinel = StandardNode()
 		prog = MultithreadedCrawler(navigators, sentinel, schedule,
-			log_file_path, args.state_file, __save_period, logging_level)
+			log_file_path, args.state_file, self.__save_period, logging_level)
 		print "Starting activity with {} threads, "\
 			"activity daily schedule: {}".format(
 				threads_no, args.daily_schedule)

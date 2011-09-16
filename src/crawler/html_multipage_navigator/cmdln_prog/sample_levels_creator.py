@@ -10,4 +10,4 @@ class SampleCmdLnLevelsCreator(AbstractCmdLnLevelsCreator):
 	
 	def create(self, args):
 		lenient_makedir(args.destination_dir)
-		return LevelsCreator.create(args.destination_dir)
+		return LevelsCreator(args.destination_dir).create()

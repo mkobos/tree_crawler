@@ -6,6 +6,7 @@
 	- root's children are leafs
 - in the Unit tests, when the mechanize.Browser opens the "/root/2011-07-02" webpage, the "HTTP Error 404: File not found" error _sometimes_ shows up. The entry in the logs looks as follows: `WARNING thread=="Thread-95", exception in node "/root/2011-07-12": "Moving to child failed". Detailed message: "HTTP Error 404: File not found".`. 
 	- probably fault of the HTTP file server?
+? change the order of nodes saved in the `*.xml`: order by names not by state
 
 Documentation
 -------------
