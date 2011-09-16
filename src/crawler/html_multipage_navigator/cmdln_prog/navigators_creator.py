@@ -53,7 +53,7 @@ class CmdLnNavigatorsCreator(AbstractCmdLnNavigatorsCreator):
 	def _create_browser_creator(self):
 		"""
 		It is possible to override this function to use a different 
-			C{AbstractWebBrowserCreator}.
+		C{AbstractWebBrowserCreator}.
 		
 		@rtype: C{AbstractWebBrowserCreator}
 		"""  

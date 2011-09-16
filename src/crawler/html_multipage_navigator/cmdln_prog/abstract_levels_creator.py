@@ -15,7 +15,7 @@ class AbstractCmdLnLevelsCreator:
 		"""
 		Create L{AbstractLevelsCreator} based on command line arguments.
 		
-		@type args: result of calling the C{parser.parse_args()} function. 
+		@param args: result of calling the C{parser.parse_args()} function. 
 			Contains result of parsing the arguments defined in L{fill_parser}
 			method.
 		@type args: L{argparse.Namespace}

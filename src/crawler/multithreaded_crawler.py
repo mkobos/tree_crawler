@@ -126,12 +126,14 @@ class MultithreadedCrawler:
 					raise Exception("Going to sleep forever?")
 			mode_change_time = (info.future_mode_change - now).total_seconds()
 			if not info.is_in_activity_period:
-				logging.info("Going to sleep for {:.1f} seconds".format(
+				logging.info("Going to sleep for {:.1f} seconds "
+							"(according to schedule)".format(
 					mode_change_time))
 				time.sleep(mode_change_time)
 				logging.info("Awaken")
 			else:
-				logging.info("Starting activity for {:.1f} seconds".format(
+				logging.info("Starting activity for {:.1f} seconds "
+							"(according to schedule)".format(
 					mode_change_time))
 				return mode_change_time
 

@@ -14,7 +14,7 @@ class AbstractCmdLnNavigatorsCreator:
 		"""
 		Create navigators based on arguments from command-line.
 		
-		@type args: result of calling the C{parser.parse_args()} function. 
+		@param args: result of calling the C{parser.parse_args()} function. 
 			Contains results of parsing the arguments defined in L{fill_parser}
 			method.
 		@type args: L{argparse.Namespace}
