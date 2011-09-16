@@ -25,7 +25,7 @@ from crawler.html_multipage_navigator.throttled_web_browser import \
 from crawler.crawler_thread import CrawlerThread
 from crawler.navigator_tree_wrapper import NavigatorTreeWrapper
 from crawler.abstract_node import NodeState
-from crawler.crawler_program import MultithreadedCrawler
+from crawler.multithreaded_crawler import MultithreadedCrawler
 
 class DownloadTestCase(unittest.TestCase):
 	def test_single_threaded_download_without_manager(self):
