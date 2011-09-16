@@ -6,9 +6,9 @@ from crawler.html_multipage_navigator.sample_page_analyzer import *
 
 class HTMLMultipageNavigatorTestCase(unittest.TestCase):
 	def test_simple_browsing(self):
-		navigator = HTMLMultipageNavigator(PageAnalyzerFactory(None),
-			"file://"+Resources.path(__file__, 
-				"../../test/data/original_site/issues_1.html"))
+		navigator = HTMLMultipageNavigator("file://"+Resources.path(__file__, 
+			"../../test/data/original_site/issues_1.html"),
+			LevelsCreator(None).create())
 		navigator.start_in_root()
 		root_name = navigator.get_path()[0]
 		children1 = navigator.get_children()

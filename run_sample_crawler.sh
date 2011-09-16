@@ -1,5 +1,7 @@
 #!/bin/bash
 
+## Run sample crawler that downloads files from a local web site
+
 rm -rf tmp
 echo ""
 echo ""

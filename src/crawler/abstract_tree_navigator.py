@@ -4,7 +4,7 @@ class NavigationException(Exception):
 class AbstractTreeNavigator:
 	"""
 	An object that has a direct access to the physical tree elements 
-	(e.g. webpages) traversed by the crawler.
+	(e.g. web pages) traversed by the crawler.
 	
 	Each method declared in this abstract class can raise a 
 	L{NavigationException}. If such an exception is raised, it will be gently

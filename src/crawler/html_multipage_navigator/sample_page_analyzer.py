@@ -5,10 +5,7 @@ from crawler.abstract_tree_navigator import NavigationException
 from common.file_helper import lenient_makedir
 from xml.etree.ElementTree import ElementTree
 from crawler.html_multipage_navigator.abstract_page_analyzer import \
-	PageLinks, AbstractPageAnalyzer, Level, AbstractPageAnalyzerFactory
-from crawler.html_multipage_navigator.web_browser import MechanizeBrowser
-from crawler.html_multipage_navigator.throttled_web_browser import \
-	ThrottledWebBrowserWrapper
+	PageLinks, AbstractPageAnalyzer, Level, AbstractLevelsCreator
 
 class PageAnalyzerException(NavigationException):
 	pass
@@ -87,27 +84,11 @@ class ArticlePageAnalyzer(AbstractPageAnalyzer):
 		shutil.copyfileobj(page_file, f)
 		f.close()
 
-class PageAnalyzerFactory(AbstractPageAnalyzerFactory):
-	def __init__(self, download_dir_path, token_bucket=None):
-		"""
-		@param token_bucket: if is not C{None}, a throttling mechanism will
-			be used, if is C{None}, no throttling mechanism will be used 
-		@type token_bucket: L{TokenBucket}
-		"""
+class LevelsCreator(AbstractLevelsCreator):
+	def __init__(self, download_dir_path):
 		self.__download_dir_path = download_dir_path
-		self.__token_bucket = token_bucket
 
-	def create_browser(self, address):
-		br = None
-		if self.__token_bucket is None:
-			br = MechanizeBrowser()
-		else:
-			br = ThrottledWebBrowserWrapper(
-				MechanizeBrowser(), self.__token_bucket)
-		br.open(address)
-		return br
-
-	def create_page_analyzers(self):
+	def create(self):
 		return [Level("magazine", MagazinePageAnalyzer()),
 				Level("issue", IssuePageAnalyzer(self.__download_dir_path)),
 				Level("article", ArticlePageAnalyzer(self.__download_dir_path))]

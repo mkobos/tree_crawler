@@ -64,7 +64,7 @@ class StandardNode(AbstractNode):
 	def get_children(self):
 		children = []
 		for state in xrange(NodeState.MAX_ENUM_INDEX+1):
-			for (name, node) in self._children[state].iteritems():
+			for (_, node) in self._children[state].iteritems():
 				children.append(node)
 		return children
 	

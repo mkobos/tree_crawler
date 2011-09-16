@@ -17,6 +17,8 @@ class AbstractPageAnalyzer:
 	def process(self, tree_path, page_file):
 		"""
 		Process the node (usually the processing is done once for every node).
+
+		@param page_file: file-like structure to be processed
 		"""
 		pass
 	
@@ -40,27 +42,20 @@ class Level:
 		@type page_analyzer: L{AbstractPageAnalyzer}
 		"""
 		self.name = name
-		"""Name of the level. Example names: "books", "chapters", "sections"."""
+		"""Name of the level. Example names: "book", "chapter", "section"."""
 
 		self.page_analyzer = page_analyzer
 		"""L{AbstractPageAnalyzer} object."""
 
-class AbstractPageAnalyzerFactory:
-	def create_browser(self, address):
-		"""
-		Create the browser and navigate it to the start page.
-		This method has to be thread-safe since it is called as the method
-		of the same object in different threads.
-		This method contains a default implementation.
+class AbstractLevelsCreator:
+	"""
+	A convenience class responsible for creating a list of C{Level}s which 
+	describe structure of the explored web site
+	"""
 
-		@rtype: L{AbstractWebBrowser}
+	def create(self):
 		"""
-		raise NotImplementedError
-
-	def create_page_analyzers(self):
+		Create list of L{Level}s. The first element is a level 
+		corresponding to the root node, the last one corresponds to	leafs.
 		"""
-		@return: list of L{Level} objects. The first element is a level 
-			corresponding to the root node, the last one corresponds to
-			leafs level.
-		"""
-		raise NotImplementedError
+		raise NotImplementedError()

@@ -1,5 +1,4 @@
 import threading
-import time
 import os.path
 import shutil
 
