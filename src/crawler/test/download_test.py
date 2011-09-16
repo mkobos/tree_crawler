@@ -32,7 +32,7 @@ class DownloadTestCase(unittest.TestCase):
 #		temp_dir = TempDir(os.path.expanduser("~/tmp"), prefix="dfs_crawler-")
 #		try:
 		with TempDir() as temp_dir:
-			levels = LevelsCreator.create(temp_dir.get_path())
+			levels = LevelsCreator(temp_dir.get_path()).create()
 			address = "file://"+\
 				Resources.path(__file__, "data/original_site/issues_1.html")
 			tree = TreeAccessor(_StandardNodeExtended())
@@ -129,7 +129,8 @@ class DownloadTestCase(unittest.TestCase):
 			navigators = []
 			for _ in xrange(threads_no):
 				navigators.append(HTMLMultipageNavigator(address,
-					LevelsCreator.create(temp_dir.get_path()), browser_creator))
+					LevelsCreator(temp_dir.get_path()).create(), 
+					browser_creator))
 			sentinel = _StandardNodeExtended()
 			crawler = _MultithreadedCrawlerExtended(navigators, sentinel)
 			start = time.time()

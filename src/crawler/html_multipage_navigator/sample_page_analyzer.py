@@ -5,7 +5,7 @@ from crawler.abstract_tree_navigator import NavigationException
 from common.file_helper import lenient_makedir
 from xml.etree.ElementTree import ElementTree
 from crawler.html_multipage_navigator.abstract_page_analyzer import \
-	PageLinks, AbstractPageAnalyzer, Level
+	PageLinks, AbstractPageAnalyzer, Level, AbstractLevelsCreator
 
 class PageAnalyzerException(NavigationException):
 	pass
@@ -84,22 +84,14 @@ class ArticlePageAnalyzer(AbstractPageAnalyzer):
 		shutil.copyfileobj(page_file, f)
 		f.close()
 
-class LevelsCreator:
-	"""
-	A convenience class responsible for creating a list of C{Level}s which 
-	describe structure of the explored web site
-	"""
+class LevelsCreator(AbstractLevelsCreator):
+	def __init__(self, download_dir_path):
+		self.__download_dir_path = download_dir_path
 
-	@staticmethod
-	def create(download_dir_path):
-		"""
-		Create list of L{Level}s. The first element is a level 
-		corresponding to the root node, the last one corresponds to
-		leafs level.
-		"""
+	def create(self):
 		return [Level("magazine", MagazinePageAnalyzer()),
-				Level("issue", IssuePageAnalyzer(download_dir_path)),
-				Level("article", ArticlePageAnalyzer(download_dir_path))]
+				Level("issue", IssuePageAnalyzer(self.__download_dir_path)),
+				Level("article", ArticlePageAnalyzer(self.__download_dir_path))]
 
 def _handle_error_page(page_file, file_path):
 	"""@return: C{True} iff the given page is an error page"""

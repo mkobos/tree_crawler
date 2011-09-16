@@ -12,7 +12,7 @@ from common.tempdir import TempDir
 class SimpleDFSCrawlerTestCase(unittest.TestCase):
 	def test_website_download(self):
 		with TempDir() as temp_dir:
-			levels = LevelsCreator.create(temp_dir.get_path())
+			levels = LevelsCreator(temp_dir.get_path()).create()
 			address = "file://"+Resources.path(__file__, 
 				"data/original_site-without_broken_links/issues_1.html")
 			navigator = HTMLMultipageNavigator(address, levels)

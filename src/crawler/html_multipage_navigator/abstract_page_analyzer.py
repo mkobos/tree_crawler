@@ -46,3 +46,16 @@ class Level:
 
 		self.page_analyzer = page_analyzer
 		"""L{AbstractPageAnalyzer} object."""
+
+class AbstractLevelsCreator:
+	"""
+	A convenience class responsible for creating a list of C{Level}s which 
+	describe structure of the explored web site
+	"""
+
+	def create(self):
+		"""
+		Create list of L{Level}s. The first element is a level 
+		corresponding to the root node, the last one corresponds to	leafs.
+		"""
+		raise NotImplementedError()
