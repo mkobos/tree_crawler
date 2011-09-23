@@ -6,9 +6,9 @@ downloading pages from a sample web site.
 """
 
 from crawler.cmdln_multithreaded_crawler import CmdLnMultithreadedCrawler
-from crawler.html_multipage_navigator.cmdln_prog.navigators_creator import \
+from crawler.html_multipage_navigator.cmdln.navigators_creator import \
 	CmdLnNavigatorsCreator
-from crawler.html_multipage_navigator.cmdln_prog.sample_levels_creator import \
+from crawler.html_multipage_navigator.cmdln.sample_levels_creator import \
 	SampleCmdLnLevelsCreator
 
 navigators_creator = CmdLnNavigatorsCreator(SampleCmdLnLevelsCreator())

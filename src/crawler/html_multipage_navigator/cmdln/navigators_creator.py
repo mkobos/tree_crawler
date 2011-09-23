@@ -7,7 +7,7 @@ from crawler.html_multipage_navigator.tree_navigator import \
 from crawler.html_multipage_navigator.sample_page_analyzer import LevelsCreator
 from crawler.abstract_cmdln_navigators_creator import \
 	AbstractCmdLnNavigatorsCreator
-from crawler.html_multipage_navigator.cmdln_prog.abstract_levels_creator \
+from crawler.html_multipage_navigator.cmdln.abstract_levels_creator \
 	import AbstractCmdLnLevelsCreator
 
 class CmdLnNavigatorsCreator(AbstractCmdLnNavigatorsCreator):
