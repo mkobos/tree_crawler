@@ -15,9 +15,9 @@ from crawler.xml_tree_serialization import XMLTreeReader
 
 class MultithreadedCrawler:
 	"""
-	A program that runs several threads to crawl the tree.
+	Runs several threads to crawl the tree.
 	
-	The program is also responsible for all the ancillary stuff: 
+	It is also responsible for all the ancillary stuff: 
 	makes sure that the	state of the tree is saved to disk, 
 	sets up the logging level etc.
 	"""

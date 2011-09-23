@@ -57,7 +57,7 @@ class HTMLMultipageNavigator(AbstractTreeNavigator):
 	def get_path(self):
 		"""
 		@return: path to the tree node the navigator is currently in i.e.
-			the subsequent node names from the tree root to the current node
+			subsequent node names from the tree root to the current node
 		"""
 		return self.__path
 
