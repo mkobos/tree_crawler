@@ -1,4 +1,4 @@
-from crawler.html_multipage_navigator.cmdln_prog.abstract_levels_creator \
+from crawler.html_multipage_navigator.cmdln.abstract_levels_creator \
 	import AbstractCmdLnLevelsCreator
 from crawler.html_multipage_navigator.sample_page_analyzer import LevelsCreator
 from common.file_helper import lenient_makedir

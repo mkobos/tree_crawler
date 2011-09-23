@@ -1,3 +1,5 @@
+- check the docstrings and fix typos
+
 - in the downloading code, handle 404 errors more gently. Place information that given file was not available due to broken link.
 - add more unit tests for different scenarios of algorithm and tree state e.g.:
 	- tree with the root only
@@ -5,10 +7,14 @@
 	- tree with no missing nodes and without errors
 	- root's children are leafs
 - in the Unit tests, when the mechanize.Browser opens the "/root/2011-07-02" webpage, the "HTTP Error 404: File not found" error _sometimes_ shows up. The entry in the logs looks as follows: `WARNING thread=="Thread-95", exception in node "/root/2011-07-12": "Moving to child failed". Detailed message: "HTTP Error 404: File not found".`. 
-	- probably fault of the HTTP file server?
-? change the order of nodes saved in the `*.xml`: order by names not by state
+	- probably a fault of the HTTP file server?
+- ? change the order of nodes saved in the `*.xml` file: order by names, not by state of the node?
+- add command-line option to try to visit once again the ERROR nodes of a tree read from a file (it might be helpful because in case of a web crawler, the pages which were not available before might be available now)
 
 Documentation
 -------------
-- describe main and root nodes
-- description of the program, its construction and construction's philosophy (along with some UML diagrams), advantages and disadvantages
+- make the documentation more accessible: 
+	- ? make some links between the documents?
+- In the `docs/tree_exploration_algorithm/text.tex` document,
+	- make a distinction between tree as a data structure shared between the threads and explored tree
+	- describe more precisely the example of the upward update of the state (the last figure).

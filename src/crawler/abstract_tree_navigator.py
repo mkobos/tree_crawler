@@ -1,4 +1,8 @@
 class NavigationException(Exception):
+	"""
+	See the description of C{AbstractTreeNavigator} class for a discussion
+	of this exception usage.
+	"""		
 	pass
 
 class AbstractTreeNavigator:

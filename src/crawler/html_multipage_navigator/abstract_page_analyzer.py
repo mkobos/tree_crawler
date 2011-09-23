@@ -18,6 +18,12 @@ class AbstractPageAnalyzer:
 		"""
 		Process the node (usually the processing is done once for every node).
 
+		@param tree_path: path to the tree node the navigator is currently in 
+			i.e. subsequent node names from the tree root to the current node.
+			This might be e.g. C{["root"]} for a path to the root node or
+			C{["root", "magazine-2011-09-18", "article_23"]} for some other
+			node inside the tree hierarchy.
+		@type tree_path: list of strings
 		@param page_file: file-like structure to be processed
 		"""
 		pass
@@ -27,7 +33,7 @@ class AbstractPageAnalyzer:
 		@param page_file: file-like structure to be analyzed
 		@param child_links_retrieved_so_far_count: number of child links 
 			retrieved so far in current node (from previous pages)
-		@return: information about links on given page. 
+		@return: information about links on the given page. 
 			The given default implementation is made for a leaf node 
 			(a page with no children).
 		@rtype: L{PageLinks}
@@ -49,8 +55,8 @@ class Level:
 
 class AbstractLevelsCreator:
 	"""
-	A convenience class responsible for creating a list of C{Level}s which 
-	describe structure of the explored web site
+	A class responsible for creating a list of C{Level}s which 
+	describe structure of the explored web site.
 	"""
 
 	def create(self):
