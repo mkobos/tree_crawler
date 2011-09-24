@@ -1,8 +1,9 @@
 import logging
 import threading
 
-from abstract_tree_accessor import AbstractTreeAccessor, NodeAction
-from abstract_node import NodeState
+from concurrent_tree_crawler.abstract_tree_accessor import \
+	AbstractTreeAccessor, NodeAction
+from concurrent_tree_crawler.abstract_node import NodeState
 
 class TreeAccessor(AbstractTreeAccessor):
 	"""

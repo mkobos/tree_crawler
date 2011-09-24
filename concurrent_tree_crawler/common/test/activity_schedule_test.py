@@ -1,6 +1,6 @@
 import unittest
 import datetime
-from common.activity_schedule import DaySchedule
+from concurrent_tree_crawler.common.activity_schedule import DaySchedule
 
 simple_interval = [datetime.time(7, 5, 00), datetime.time(8, 10, 10)]
 in_simple = datetime.datetime(2012, 7, 7, 7, 7, 7)

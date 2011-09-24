@@ -1,7 +1,7 @@
 import threading
 import logging
 
-from common.threads.sleep import Sleep
+from concurrent_tree_crawler.common.threads.sleep import Sleep
 
 class TokenBucket:
 	"""Interface of a token bucket"""

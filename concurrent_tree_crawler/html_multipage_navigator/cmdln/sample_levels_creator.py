@@ -1,7 +1,8 @@
-from html_multipage_navigator.cmdln.abstract_levels_creator \
+from concurrent_tree_crawler.html_multipage_navigator.cmdln.abstract_levels_creator \
 	import AbstractCmdLnLevelsCreator
-from html_multipage_navigator.sample_page_analyzer import LevelsCreator
-from common.file_helper import lenient_makedir
+from concurrent_tree_crawler.html_multipage_navigator.sample_page_analyzer \
+	import LevelsCreator
+from concurrent_tree_crawler.common.file_helper import lenient_makedir
 
 class SampleCmdLnLevelsCreator(AbstractCmdLnLevelsCreator):
 	def fill_parser(self, parser):

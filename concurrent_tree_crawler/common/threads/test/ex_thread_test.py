@@ -1,6 +1,6 @@
 import unittest
 import threading
-from common.threads.ex_thread import ExThread
+from concurrent_tree_crawler.common.threads.ex_thread import ExThread
 
 class MyException(Exception):
 	pass

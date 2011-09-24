@@ -1,13 +1,16 @@
-from html_multipage_navigator.web_browser import MechanizeBrowserCreator
-from html_multipage_navigator.throttled_web_browser import \
-	ThrottledWebBrowserCreator
-from common.threads.token_bucket import TokenBucketFiller, StandardTokenBucket
-from html_multipage_navigator.tree_navigator import \
+from concurrent_tree_crawler.html_multipage_navigator.web_browser import \
+	MechanizeBrowserCreator
+from concurrent_tree_crawler.html_multipage_navigator.throttled_web_browser \
+	import ThrottledWebBrowserCreator
+from concurrent_tree_crawler.common.threads.token_bucket import \
+	TokenBucketFiller, StandardTokenBucket
+from concurrent_tree_crawler.html_multipage_navigator.tree_navigator import \
 	HTMLMultipageNavigator
-from html_multipage_navigator.sample_page_analyzer import LevelsCreator
-from abstract_cmdln_navigators_creator import \
+from concurrent_tree_crawler.html_multipage_navigator.sample_page_analyzer \
+	import LevelsCreator
+from concurrent_tree_crawler.abstract_cmdln_navigators_creator import \
 	AbstractCmdLnNavigatorsCreator
-from html_multipage_navigator.cmdln.abstract_levels_creator \
+from concurrent_tree_crawler.html_multipage_navigator.cmdln.abstract_levels_creator \
 	import AbstractCmdLnLevelsCreator
 
 class CmdLnNavigatorsCreator(AbstractCmdLnNavigatorsCreator):

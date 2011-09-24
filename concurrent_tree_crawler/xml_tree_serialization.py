@@ -1,5 +1,5 @@
 import xml.parsers.expat
-from abstract_node import AbstractNode, NodeState
+from concurrent_tree_crawler.abstract_node import AbstractNode, NodeState
 
 class XMLTreeWriter:
 	def __init__(self, file_):

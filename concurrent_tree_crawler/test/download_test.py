@@ -4,27 +4,31 @@ import unittest
 import time
 import logging
 
-#from common.logger import Logger
-from common.resources import Resources
-from common.dir_tree_comparer import are_dir_trees_equal
-from common.tempdir import TempDir
-from common.delayed_http_files_server import DelayedHTTPFilesServer
-from common.threads.token_bucket import TokenBucketFiller, StandardTokenBucket
-from test.subtrees_comparer import subtrees_equal
+#from concurrent_tree_crawler.common.logger import Logger
+from concurrent_tree_crawler.common.resources import Resources
+from concurrent_tree_crawler.common.dir_tree_comparer import are_dir_trees_equal
+from concurrent_tree_crawler.common.tempdir import TempDir
+from concurrent_tree_crawler.common.delayed_http_files_server import \
+	DelayedHTTPFilesServer
+from concurrent_tree_crawler.common.threads.token_bucket import \
+	TokenBucketFiller, StandardTokenBucket
+from concurrent_tree_crawler.test.subtrees_comparer import subtrees_equal
 
-from crawlers_manager import CrawlersManager
-from html_multipage_navigator.tree_navigator import HTMLMultipageNavigator
-from tree_accessor import TreeAccessor
-from standard_node import StandardNode
-from html_multipage_navigator.sample_page_analyzer import \
-	LevelsCreator
-from html_multipage_navigator.web_browser import MechanizeBrowserCreator
-from html_multipage_navigator.throttled_web_browser import \
-	ThrottledWebBrowserCreator
-from crawler_thread import CrawlerThread
-from navigator_tree_wrapper import NavigatorTreeWrapper
-from abstract_node import NodeState
-from multithreaded_crawler import MultithreadedCrawler
+from concurrent_tree_crawler.crawlers_manager import CrawlersManager
+from concurrent_tree_crawler.html_multipage_navigator.tree_navigator import \
+	HTMLMultipageNavigator
+from concurrent_tree_crawler.tree_accessor import TreeAccessor
+from concurrent_tree_crawler.standard_node import StandardNode
+from concurrent_tree_crawler.html_multipage_navigator.sample_page_analyzer \
+	import LevelsCreator
+from concurrent_tree_crawler.html_multipage_navigator.web_browser import \
+	MechanizeBrowserCreator
+from concurrent_tree_crawler.html_multipage_navigator.throttled_web_browser \
+	import ThrottledWebBrowserCreator
+from concurrent_tree_crawler.crawler_thread import CrawlerThread
+from concurrent_tree_crawler.navigator_tree_wrapper import NavigatorTreeWrapper
+from concurrent_tree_crawler.abstract_node import NodeState
+from concurrent_tree_crawler.multithreaded_crawler import MultithreadedCrawler
 
 class DownloadTestCase(unittest.TestCase):
 	def test_single_threaded_download_without_manager(self):

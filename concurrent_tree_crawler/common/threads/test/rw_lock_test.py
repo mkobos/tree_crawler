@@ -2,7 +2,7 @@ import unittest
 import threading
 import time
 import copy
-from common.threads.rw_lock import RWLock
+from concurrent_tree_crawler.common.threads.rw_lock import RWLock
 
 """
 This code is a derivative of the code from ActiveState Code service at the address:

@@ -1,12 +1,14 @@
 import unittest
 
-from common.resources import Resources
-from common.dir_tree_comparer import are_dir_trees_equal
+from concurrent_tree_crawler.common.resources import Resources
+from concurrent_tree_crawler.common.dir_tree_comparer import are_dir_trees_equal
 
-from simple_dfs_crawler import SimpleDFSCrawler
-from html_multipage_navigator.tree_navigator import HTMLMultipageNavigator
-from html_multipage_navigator.sample_page_analyzer import LevelsCreator
-from common.tempdir import TempDir
+from concurrent_tree_crawler.simple_dfs_crawler import SimpleDFSCrawler
+from concurrent_tree_crawler.html_multipage_navigator.tree_navigator import \
+	HTMLMultipageNavigator
+from concurrent_tree_crawler.html_multipage_navigator.sample_page_analyzer \
+	import LevelsCreator
+from concurrent_tree_crawler.common.tempdir import TempDir
 
 class SimpleDFSCrawlerTestCase(unittest.TestCase):
 	def test_website_download(self):

@@ -3,10 +3,11 @@ import datetime
 import os.path
 import argparse
 
-from standard_node import StandardNode
-from abstract_node import NodeState
-from multithreaded_crawler import MultithreadedCrawler
-from common.activity_schedule import DaySchedule, AlwaysActiveSchedule
+from concurrent_tree_crawler.standard_node import StandardNode
+from concurrent_tree_crawler.abstract_node import NodeState
+from concurrent_tree_crawler.multithreaded_crawler import MultithreadedCrawler
+from concurrent_tree_crawler.common.activity_schedule import \
+	DaySchedule, AlwaysActiveSchedule
 
 class CmdLnMultithreadedCrawler:
 	"""

@@ -1,11 +1,11 @@
 import re
 import shutil
 import os.path
-from abstract_tree_navigator import NavigationException
-from common.file_helper import lenient_makedir
 from xml.etree.ElementTree import ElementTree
-from html_multipage_navigator.abstract_page_analyzer import \
-	PageLinks, AbstractPageAnalyzer, Level, AbstractLevelsCreator
+from concurrent_tree_crawler.abstract_tree_navigator import NavigationException
+from concurrent_tree_crawler.common.file_helper import lenient_makedir
+from concurrent_tree_crawler.html_multipage_navigator.abstract_page_analyzer \
+	import PageLinks, AbstractPageAnalyzer, Level, AbstractLevelsCreator
 
 class PageAnalyzerException(NavigationException):
 	pass

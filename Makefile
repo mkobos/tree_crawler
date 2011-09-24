@@ -1,12 +1,10 @@
 all: build-source-package
 
-build-source-package:
-	rm -rf build dist
+build-source-package: clean
 	./setup.py sdist
 
-install:
-	rm -rf build dist
+install: clean
 	./setup.py install
 
 clean:
-	rm -rf dist
+	rm -rf build dist concurrent_tree_crawler.egg-info

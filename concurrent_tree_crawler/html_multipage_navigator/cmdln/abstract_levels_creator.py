@@ -1,5 +1,5 @@
 import argparse
-from html_multipage_navigator.sample_page_analyzer import LevelsCreator
+from concurrent_tree_crawler.html_multipage_navigator.sample_page_analyzer import LevelsCreator
 
 class AbstractCmdLnLevelsCreator:
 	def fill_parser(self, parser):

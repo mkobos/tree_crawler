@@ -3,15 +3,15 @@ import logging
 import time
 import datetime
 
-from common.file_helper import lenient_makedir
-from common.logger import Logger
-from common.activity_schedule import AlwaysActiveSchedule
-from crawlers_manager import CrawlersManager
-from rw_lock_tree_accessor import RWLockTreeAccessor
-from navigator_tree_wrapper import NavigatorTreeWrapper
-from tree_saver_thread import TreeSaverThread
-from abstract_node import NodeState
-from xml_tree_serialization import XMLTreeReader
+from concurrent_tree_crawler.common.file_helper import lenient_makedir
+from concurrent_tree_crawler.common.logger import Logger
+from concurrent_tree_crawler.common.activity_schedule import AlwaysActiveSchedule
+from concurrent_tree_crawler.crawlers_manager import CrawlersManager
+from concurrent_tree_crawler.rw_lock_tree_accessor import RWLockTreeAccessor
+from concurrent_tree_crawler.navigator_tree_wrapper import NavigatorTreeWrapper
+from concurrent_tree_crawler.tree_saver_thread import TreeSaverThread
+from concurrent_tree_crawler.abstract_node import NodeState
+from concurrent_tree_crawler.xml_tree_serialization import XMLTreeReader
 
 class MultithreadedCrawler:
 	"""

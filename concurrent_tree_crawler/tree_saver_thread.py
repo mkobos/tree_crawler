@@ -2,9 +2,9 @@ import threading
 import os.path
 import shutil
 
-from common.tempdir import TempDir
-from common.threads.sleep import Sleep
-from xml_tree_serialization import XMLTreeWriter
+from concurrent_tree_crawler.common.tempdir import TempDir
+from concurrent_tree_crawler.common.threads.sleep import Sleep
+from concurrent_tree_crawler.xml_tree_serialization import XMLTreeWriter
 
 class TreeSaverThread(threading.Thread):	
 	def __init__(self, dst_file_path, tree, sleep_time):

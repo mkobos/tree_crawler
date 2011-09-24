@@ -1,8 +1,8 @@
 import unittest
 import os.path
 
-from common.dir_tree_comparer import are_dir_trees_equal
-from common.resources import Resources
+from concurrent_tree_crawler.common.dir_tree_comparer import are_dir_trees_equal
+from concurrent_tree_crawler.common.resources import Resources
 
 class DirTreeComparerTestCase(unittest.TestCase):
 	def test_equal_dir_trees(self):

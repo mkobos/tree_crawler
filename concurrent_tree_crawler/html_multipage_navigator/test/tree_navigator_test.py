@@ -1,7 +1,9 @@
 import unittest
-from common.resources import Resources
-from html_multipage_navigator.tree_navigator import HTMLMultipageNavigator
-from html_multipage_navigator.sample_page_analyzer import *
+from concurrent_tree_crawler.common.resources import Resources
+from concurrent_tree_crawler.html_multipage_navigator.tree_navigator import \
+	HTMLMultipageNavigator
+from concurrent_tree_crawler.html_multipage_navigator.sample_page_analyzer \
+	import *
 
 class HTMLMultipageNavigatorTestCase(unittest.TestCase):
 	def test_simple_browsing(self):

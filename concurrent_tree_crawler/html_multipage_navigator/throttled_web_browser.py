@@ -1,5 +1,5 @@
-from html_multipage_navigator.web_browser import AbstractWebBrowser, \
-	AbstractWebBrowserCreator
+from concurrent_tree_crawler.html_multipage_navigator.web_browser import \
+	AbstractWebBrowser, AbstractWebBrowserCreator
 
 class ThrottledWebBrowserWrapper(AbstractWebBrowser):
 	def __init__(self, browser, token_bucket):

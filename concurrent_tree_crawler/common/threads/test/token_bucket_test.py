@@ -1,7 +1,8 @@
 import unittest
 import time
 import threading
-from common.threads.token_bucket import StandardTokenBucket, TokenBucketFiller
+from concurrent_tree_crawler.common.threads.token_bucket import \
+	StandardTokenBucket, TokenBucketFiller
 
 class TokenBucketTestCase(unittest.TestCase):
 	def test_get(self):
