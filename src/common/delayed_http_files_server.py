@@ -8,7 +8,7 @@ import SimpleHTTPServer
 
 class DelayedHTTPFilesServer:
 	"""
-	HTTP Files server where a new thread is created for each new connection.
+	HTTP Files server with a new thread created for each new connection.
 	Execution of work of each thread is delayed by a given amount of time.
 	"""
 

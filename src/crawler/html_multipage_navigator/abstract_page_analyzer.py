@@ -3,20 +3,21 @@ from crawler.html_multipage_navigator.web_browser import AbstractWebBrowser
 class PageLinks:
 	def __init__(self, children, next_page_link):
 		"""
-		@param children: A list of (name of child, child link) pairs.
-		@param next_page_link: Link to the next page on this level.
+		@param children: list of (name of child, link to the child) pairs.
+		@param next_page_link: link to the next page corresponding to the
+			same node.
 		"""
 		self.children = children
 		"""A list of (name of child, child link) pairs."""
 
 		self.next_page_link = next_page_link
-		"""Link to the next page on this level. 
+		"""Link to the next page corresponding to the same node.
 		C{None}, if there is no such link on the page."""
 
 class AbstractPageAnalyzer:
 	def process(self, tree_path, page_file):
 		"""
-		Process the node (usually the processing is done once for every node).
+		Process the node (normally, this method is called once for every node).
 
 		@param tree_path: path to the tree node the navigator is currently in 
 			i.e. subsequent node names from the tree root to the current node.
@@ -51,7 +52,8 @@ class Level:
 		"""Name of the level. Example names: "book", "chapter", "section"."""
 
 		self.page_analyzer = page_analyzer
-		"""L{AbstractPageAnalyzer} object."""
+		"""L{AbstractPageAnalyzer} object used for analyzing pages of the 
+		given level."""
 
 class AbstractLevelsCreator:
 	"""
@@ -62,6 +64,6 @@ class AbstractLevelsCreator:
 	def create(self):
 		"""
 		Create list of L{Level}s. The first element is a level 
-		corresponding to the root node, the last one corresponds to	leafs.
+		corresponding to the root node, the last one corresponds to	a leaf.
 		"""
 		raise NotImplementedError()

@@ -21,8 +21,8 @@ class TreeAccessor(AbstractTreeAccessor):
 		"""
 		The sentinel is a purely technical object. It shouldn't be
 		analyzed by the navigator. It is here just to make sure that the
-		root of the tree has a parent because it required by our algorithm
-		that all of the nodes in the tree have a parent.
+		root of the tree has a parent. This is because it is required by our 
+		algorithm that all of the nodes in the tree have a parent.
 		"""
 		
 		self.__root = None

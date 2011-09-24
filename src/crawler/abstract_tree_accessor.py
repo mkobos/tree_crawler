@@ -2,7 +2,7 @@ from crawler.abstract_node import AbstractNode, NodeState
 
 class NodeAction:
 	"""Enumeration describing actions that can be taken by a crawler when
-	entering new node""" 
+	entering a new node""" 
 	
 	TO_PROCESS = 0
 	TO_VISIT = 1
@@ -19,6 +19,7 @@ class AbstractTreeAccessor:
 	"""
 	An interface for the tree made of L{AbstractNode}s.
 	"""
+
 	def get_sentinel(self):
 		"""
 		@return: sentinel node
@@ -38,7 +39,7 @@ class AbstractTreeAccessor:
 		A convenience method. Returns tree path to the given node.
 		
 		@type node: L{AbstractNode}
-		@return: list of node names in the order from the root to the given node
+		@return: subsequent node names from the tree root to the current node
 		@rtype: list of strings
 		"""
 		path = []

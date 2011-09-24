@@ -1,8 +1,8 @@
 import threading
 
 class Sleep:
-	"""A counterpart of the C{time.sleep()} function with a possibility of
-	other thread to wake up the sleeping thread. 
+	"""A counterpart of the C{time.sleep()} function. This implementation
+	allows some thread to wake up the sleeping thread. 
 	"""
 	def __init__(self):
 		self.__cond = threading.Condition()

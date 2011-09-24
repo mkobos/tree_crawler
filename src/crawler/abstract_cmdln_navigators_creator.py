@@ -4,7 +4,7 @@ class AbstractCmdLnNavigatorsCreator:
 	def fill_parser(self, parser):
 		"""
 		Fill the given parser object with command-line arguments needed to
-		initialize navigators created in L{create} method.
+		initialize navigators which are created in L{create} method.
 
 		@type parser: L{argparse.ArgumentParser}
 		"""
@@ -15,8 +15,8 @@ class AbstractCmdLnNavigatorsCreator:
 		Create navigators based on arguments from command-line.
 		
 		@param args: result of calling the C{parser.parse_args()} function. 
-			Contains results of parsing the arguments defined in L{fill_parser}
-			method.
+			Contains results of parsing of the arguments defined in 
+			L{fill_parser} method.
 		@type args: L{argparse.Namespace}
 		@param navigators_count: number of L{AbstractTreeNavigator}s to create
 		@return: navigators that will be used by the crawler threads. 
@@ -28,6 +28,6 @@ class AbstractCmdLnNavigatorsCreator:
 	def on_exit(self):
 		"""
 		This method is called before the program exit. 
-		This is the place to execute some cleanup actions.
+		This is the place to do some cleanup.
 		"""
 		raise NotImplementedError()

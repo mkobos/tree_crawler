@@ -14,8 +14,8 @@ class NodeState:
 	OPEN or VISITED or PROCESSING."""
 	
 	CLOSED = 3
-	"""The node was set a CLOSED state or all children of this node are 
-	in a CLOSED state. 
+	"""The leaf node has been processed or all the children of 
+	the internal node are in a CLOSED state. 
 	Traversing children of this node by a new crawler would be pointless."""
 	
 	ERROR = 4

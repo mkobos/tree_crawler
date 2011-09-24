@@ -5,7 +5,7 @@ from crawler.abstract_tree_accessor import NodeAction
 
 class RWLockTreeAccessor(TreeAccessor):
 	"""
-	A version of TreeAccessor where sensitive methods are protected by
+	A version of the L{TreeAccessor} where sensitive methods are protected by
 	readers-writers lock.
 	"""
 		

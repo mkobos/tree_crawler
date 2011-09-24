@@ -9,6 +9,11 @@ from crawler.multithreaded_crawler import MultithreadedCrawler
 from common.activity_schedule import DaySchedule, AlwaysActiveSchedule
 
 class CmdLnMultithreadedCrawler:
+	"""
+	A class that creates the L{MultithreadedCrawler} object based on 
+	command-line parameters
+	"""
+		
 	__default_threads_no = 2
 	__save_period = 0.1
 	

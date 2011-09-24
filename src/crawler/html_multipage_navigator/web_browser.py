@@ -4,7 +4,7 @@ class AbstractWebBrowser:
 	"""An abstract functionality of a web browser"""
 	
 	def open(self, address):
-		"""Open web page with given address"""
+		"""Open a web page with a given address"""
 		raise NotImplementedError
 	
 	def response(self):

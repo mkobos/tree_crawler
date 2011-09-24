@@ -10,12 +10,12 @@ class HTMLMultipageNavigator(AbstractTreeNavigator):
 	"""
 	A web site tree navigator. 
 	
-	It is assumed that all web pages corresponding	to the nodes of the tree on 
-	the given level all have the same basic	characteristics and are analyzed 
-	in the same way, namely by the same object of a subclass of 
-	L{AbstractPageAnalyzer}. In particular, all of the leaf web pages are all 
+	It is assumed that all web pages corresponding to the nodes of the tree on 
+	the given level have the same basic	characteristics and are analyzed 
+	in the same way, namely by the same object inheriting from  
+	L{AbstractPageAnalyzer}. In particular, all of the leaf web pages are 
 	placed on the same level of the tree. Some of the parts of the tree might
-	be missing, which results marking the certain nodes of the tree as ERROR.
+	be missing, which results in marking certain nodes of the tree as ERROR.
 	"""
 	
 	__repetition_suffix_template = "-repetition_{}"
@@ -156,15 +156,15 @@ class _ChildrenHistory:
 	def push(self, children):
 		"""
 		@param children: info about children on current level of tree structure 
-		@type children: L{OrderedDictionary} with the key as child name and
-			the value as a link to child webpage.
+		@type children: L{OrderedDictionary} with the key being the child name
+			and the value being the link to child web page.
 		"""
 		self.__queue.append(children)
 	
 	def pop(self):
 		"""
 		@return: info about children on current level of tree structure 
-		@rtype: L{OrderedDictionary} with the key as child name and
-			the value as a link to child webpage.
+		@rtype: L{OrderedDictionary} with the key being the child name
+			and the value being the link to child web page.
 		"""
 		return self.__queue.pop()

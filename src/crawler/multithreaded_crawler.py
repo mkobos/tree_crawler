@@ -37,7 +37,7 @@ class MultithreadedCrawler:
 			program works until it finishes crawling.
 		@type activity_schedule: L{AbstractActivitySchedule} 
 		@param log_file_path: path to the log file. If C{None}, no log file
-			will be used
+			will be used.
 		@param state_file_path: path to the file where the state of the
 			program will be saved. If C{None}, the state will not be saved.
 		@param save_period: time between saving the tree state. If
@@ -49,8 +49,7 @@ class MultithreadedCrawler:
 		if state_file_path is not None:
 			if os.path.exists(state_file_path):
 				print "State file already exists. Loading the tree from this "\
-					"file and changing nodes with state PROCESSING to OPEN "\
-					"state... ",
+					"file and changing nodes with state PROCESSING to OPEN ... ",
 				self.__load_state_file(state_file_path, sentinel)
 				print "Done."
 			else:

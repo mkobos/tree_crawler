@@ -11,6 +11,8 @@ class PageAnalyzerException(NavigationException):
 	pass
 
 class MagazinePageAnalyzer(AbstractPageAnalyzer):
+	"""A class that parses magazine-level pages"""
+	
 	def get_links(self, page_file, child_links_retrieved_so_far):
 		children = []
 		doc = ElementTree(file=page_file)
@@ -38,6 +40,8 @@ class MagazinePageAnalyzer(AbstractPageAnalyzer):
 		return "{}-{}-{}".format(year_str, month, day)
 
 class IssuePageAnalyzer(AbstractPageAnalyzer):
+	"""A class that parses issues-level pages"""
+
 	def __init__(self, dst_dir_path):
 		self.__dst_dir_path = dst_dir_path	
 
@@ -66,6 +70,8 @@ class IssuePageAnalyzer(AbstractPageAnalyzer):
 		return PageLinks(children, next_page_link)
 
 class ArticlePageAnalyzer(AbstractPageAnalyzer):
+	"""A class that downloads article pages"""
+	
 	def __init__(self, dst_dir_path):
 		self.__dst_dir_path = dst_dir_path
 
