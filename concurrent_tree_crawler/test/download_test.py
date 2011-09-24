@@ -10,22 +10,21 @@ from common.dir_tree_comparer import are_dir_trees_equal
 from common.tempdir import TempDir
 from common.delayed_http_files_server import DelayedHTTPFilesServer
 from common.threads.token_bucket import TokenBucketFiller, StandardTokenBucket
-from crawler.test.subtrees_comparer import subtrees_equal
+from test.subtrees_comparer import subtrees_equal
 
-from crawler.crawlers_manager import CrawlersManager
-from crawler.html_multipage_navigator.tree_navigator import \
-	HTMLMultipageNavigator
-from crawler.tree_accessor import TreeAccessor
-from crawler.standard_node import StandardNode
-from crawler.html_multipage_navigator.sample_page_analyzer import \
+from crawlers_manager import CrawlersManager
+from html_multipage_navigator.tree_navigator import HTMLMultipageNavigator
+from tree_accessor import TreeAccessor
+from standard_node import StandardNode
+from html_multipage_navigator.sample_page_analyzer import \
 	LevelsCreator
-from crawler.html_multipage_navigator.web_browser import MechanizeBrowserCreator
-from crawler.html_multipage_navigator.throttled_web_browser import \
+from html_multipage_navigator.web_browser import MechanizeBrowserCreator
+from html_multipage_navigator.throttled_web_browser import \
 	ThrottledWebBrowserCreator
-from crawler.crawler_thread import CrawlerThread
-from crawler.navigator_tree_wrapper import NavigatorTreeWrapper
-from crawler.abstract_node import NodeState
-from crawler.multithreaded_crawler import MultithreadedCrawler
+from crawler_thread import CrawlerThread
+from navigator_tree_wrapper import NavigatorTreeWrapper
+from abstract_node import NodeState
+from multithreaded_crawler import MultithreadedCrawler
 
 class DownloadTestCase(unittest.TestCase):
 	def test_single_threaded_download_without_manager(self):

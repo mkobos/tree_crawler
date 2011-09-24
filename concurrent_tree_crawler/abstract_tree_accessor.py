@@ -1,4 +1,4 @@
-from crawler.abstract_node import AbstractNode, NodeState
+from abstract_node import AbstractNode, NodeState
 
 class NodeAction:
 	"""Enumeration describing actions that can be taken by a crawler when

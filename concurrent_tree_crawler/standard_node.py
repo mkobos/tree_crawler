@@ -1,7 +1,7 @@
 import threading
 
 from collections import OrderedDict
-from crawler.abstract_node import AbstractNode, NodeState
+from abstract_node import AbstractNode, NodeState
 
 class StandardNode(AbstractNode):
 	"""A simple in-memory implementation of the L{AbstractNode}."""

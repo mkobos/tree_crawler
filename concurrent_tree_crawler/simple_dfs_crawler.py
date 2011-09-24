@@ -1,4 +1,4 @@
-from crawler.abstract_tree_navigator import AbstractTreeNavigator
+from abstract_tree_navigator import AbstractTreeNavigator
 
 class SimpleDFSCrawler:
 	def __init__(self, navigator):

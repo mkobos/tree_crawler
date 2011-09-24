@@ -1,0 +1,5 @@
+include MANIFEST.in
+include MIT-LICENSE.txt
+include README.markdown
+recursive-include concurrent_tree_crawler *
+recursive-exclude concurrent_tree_crawler *.pyc

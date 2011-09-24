@@ -3,10 +3,9 @@ import unittest
 from common.resources import Resources
 from common.dir_tree_comparer import are_dir_trees_equal
 
-from crawler.simple_dfs_crawler import SimpleDFSCrawler
-from crawler.html_multipage_navigator.tree_navigator import \
-	HTMLMultipageNavigator
-from crawler.html_multipage_navigator.sample_page_analyzer import LevelsCreator
+from simple_dfs_crawler import SimpleDFSCrawler
+from html_multipage_navigator.tree_navigator import HTMLMultipageNavigator
+from html_multipage_navigator.sample_page_analyzer import LevelsCreator
 from common.tempdir import TempDir
 
 class SimpleDFSCrawlerTestCase(unittest.TestCase):

@@ -1,10 +1,10 @@
 import re
 import shutil
 import os.path
-from crawler.abstract_tree_navigator import NavigationException
+from abstract_tree_navigator import NavigationException
 from common.file_helper import lenient_makedir
 from xml.etree.ElementTree import ElementTree
-from crawler.html_multipage_navigator.abstract_page_analyzer import \
+from html_multipage_navigator.abstract_page_analyzer import \
 	PageLinks, AbstractPageAnalyzer, Level, AbstractLevelsCreator
 
 class PageAnalyzerException(NavigationException):

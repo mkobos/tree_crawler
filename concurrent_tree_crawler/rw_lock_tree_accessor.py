@@ -1,7 +1,7 @@
 from common.threads.rw_lock import RWLock
-from crawler.tree_accessor import TreeAccessor
-from crawler.abstract_node import NodeState
-from crawler.abstract_tree_accessor import NodeAction
+from tree_accessor import TreeAccessor
+from abstract_node import NodeState
+from abstract_tree_accessor import NodeAction
 
 class RWLockTreeAccessor(TreeAccessor):
 	"""

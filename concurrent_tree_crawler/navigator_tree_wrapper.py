@@ -1,7 +1,7 @@
 import logging
 import threading
 
-from crawler.abstract_tree_navigator import NavigationException
+from abstract_tree_navigator import NavigationException
 
 class NavigatorTreeWrapper:
 	"""

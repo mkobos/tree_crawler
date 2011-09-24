@@ -1,8 +1,8 @@
 import logging
 import threading
 
-from crawler.abstract_tree_accessor import AbstractTreeAccessor, NodeAction
-from crawler.abstract_node import NodeState
+from abstract_tree_accessor import AbstractTreeAccessor, NodeAction
+from abstract_node import NodeState
 
 class TreeAccessor(AbstractTreeAccessor):
 	"""

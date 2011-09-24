@@ -5,10 +5,10 @@ This script is responsible for initialization of the crawler to execute
 a task of downloading pages from a sample web site.
 """
 
-from crawler.cmdln_multithreaded_crawler import CmdLnMultithreadedCrawler
-from crawler.html_multipage_navigator.cmdln.navigators_creator import \
+from cmdln_multithreaded_crawler import CmdLnMultithreadedCrawler
+from html_multipage_navigator.cmdln.navigators_creator import \
 	CmdLnNavigatorsCreator
-from crawler.html_multipage_navigator.cmdln.sample_levels_creator import \
+from html_multipage_navigator.cmdln.sample_levels_creator import \
 	SampleCmdLnLevelsCreator
 
 navigators_creator = CmdLnNavigatorsCreator(SampleCmdLnLevelsCreator())

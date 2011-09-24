@@ -2,9 +2,8 @@ import logging
 from collections import OrderedDict
 from collections import deque
 
-from crawler.abstract_tree_navigator import AbstractTreeNavigator, \
-	NavigationException
-from crawler.html_multipage_navigator.web_browser import MechanizeBrowserCreator
+from abstract_tree_navigator import AbstractTreeNavigator, NavigationException
+from html_multipage_navigator.web_browser import MechanizeBrowserCreator
 
 class HTMLMultipageNavigator(AbstractTreeNavigator):
 	"""

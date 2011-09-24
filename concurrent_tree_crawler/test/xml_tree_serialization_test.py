@@ -1,9 +1,9 @@
 import unittest
 import StringIO
-from crawler.standard_node import StandardNode
-from crawler.abstract_node import NodeState
-from crawler.test.subtrees_comparer import subtrees_equal
-from crawler.xml_tree_serialization import XMLTreeWriter, XMLTreeReader
+from standard_node import StandardNode
+from abstract_node import NodeState
+from test.subtrees_comparer import subtrees_equal
+from xml_tree_serialization import XMLTreeWriter, XMLTreeReader
 
 class XMLTreeSerializationTestCase(unittest.TestCase):
 	def test_basic_write_and_read(self):

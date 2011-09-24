@@ -2,8 +2,8 @@ import threading
 import logging
 
 from common.threads.ex_thread import ExThread
-from crawler.abstract_tree_navigator import NavigationException
-from crawler.abstract_tree_accessor import NodeAction
+from abstract_tree_navigator import NavigationException
+from abstract_tree_accessor import NodeAction
 
 class CrawlerThread(ExThread):	
 	def __init__(self, navigator, tree, status_queue=None):

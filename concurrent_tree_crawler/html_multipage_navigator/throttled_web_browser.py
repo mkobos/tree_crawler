@@ -1,4 +1,4 @@
-from crawler.html_multipage_navigator.web_browser import AbstractWebBrowser, \
+from html_multipage_navigator.web_browser import AbstractWebBrowser, \
 	AbstractWebBrowserCreator
 
 class ThrottledWebBrowserWrapper(AbstractWebBrowser):

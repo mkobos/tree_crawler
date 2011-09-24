@@ -4,7 +4,7 @@ import shutil
 
 from common.tempdir import TempDir
 from common.threads.sleep import Sleep
-from crawler.xml_tree_serialization import XMLTreeWriter
+from xml_tree_serialization import XMLTreeWriter
 
 class TreeSaverThread(threading.Thread):	
 	def __init__(self, dst_file_path, tree, sleep_time):

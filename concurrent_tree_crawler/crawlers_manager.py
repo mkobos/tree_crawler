@@ -1,6 +1,6 @@
 import Queue
 import time
-from crawler.crawler_thread import CrawlerThread
+from crawler_thread import CrawlerThread
 
 class CrawlersManagerException(Exception):
 	pass

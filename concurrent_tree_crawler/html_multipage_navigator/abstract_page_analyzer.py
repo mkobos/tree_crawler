@@ -1,4 +1,4 @@
-from crawler.html_multipage_navigator.web_browser import AbstractWebBrowser
+from html_multipage_navigator.web_browser import AbstractWebBrowser
 
 class PageLinks:
 	def __init__(self, children, next_page_link):

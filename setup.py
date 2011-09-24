@@ -12,7 +12,7 @@ setup(
     	'concurrent_tree_crawler.html_multipage_navigator.cmdln'],
     scripts=['bin/make_documentation.sh', 'bin/run_sample_crawler.sh',
     	'bin/run_sample_download_crawler.py', 'bin/run_tests.py'],
-    url='http://pypi.python.org/pypi/ConcurrentTreeCrawler/',
+    url='http://github.com/mkobos/tree_crawler',
     license='MIT-LICENSE.txt',
     description='A generic concurrent tree crawling algorithm with a sample implementation for website crawling.',
     long_description=open('README.markdown').read(),

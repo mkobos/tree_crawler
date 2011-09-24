@@ -3,9 +3,9 @@ import datetime
 import os.path
 import argparse
 
-from crawler.standard_node import StandardNode
-from crawler.abstract_node import NodeState
-from crawler.multithreaded_crawler import MultithreadedCrawler
+from standard_node import StandardNode
+from abstract_node import NodeState
+from multithreaded_crawler import MultithreadedCrawler
 from common.activity_schedule import DaySchedule, AlwaysActiveSchedule
 
 class CmdLnMultithreadedCrawler:
