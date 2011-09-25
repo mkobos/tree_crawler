@@ -13,7 +13,7 @@ setup(
     license='MIT-LICENSE.txt',
     description='A generic concurrent tree crawling algorithm with a '\
     	'sample implementation for website crawling.',
-    long_description=open('README.markdown').read(),
+    long_description=open('README.mkd').read(),
     install_requires=[
         "nose",
         "mechanize",
