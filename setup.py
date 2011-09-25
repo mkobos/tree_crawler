@@ -9,8 +9,6 @@ setup(
     author_email='mateusz@mkobos.com',
     packages=find_packages(),
     include_package_data = True, ## Include non-source code files (which have to be additionally specified in `MANIFEST.in` file)
-    scripts=['bin/make_documentation.sh', 'bin/run_sample_crawler.sh',
-    	'bin/run_sample_download_crawler.py', 'bin/run_tests.py'],
     url='http://github.com/mkobos/tree_crawler',
     license='MIT-LICENSE.txt',
     description='A generic concurrent tree crawling algorithm with a '\
@@ -21,4 +19,12 @@ setup(
         "mechanize",
     ],
     test_suite='nose.collector', ## Add ability to run tests in the code through the setup.py script
+    classifiers=[
+        "Development Status :: 3 - Alpha",
+        "Environment :: Console",
+        "Intended Audience :: Developers",
+        "Programming Language :: Python",
+        "License :: OSI Approved :: MIT License",
+        "Topic :: Internet :: WWW/HTTP",
+    ],
 )

@@ -6,11 +6,14 @@ build-source-package: clean
 install: clean
 	./setup.py install --user
 
+uninstall:
+	pip concurrent_tree_crawler
+
 test:
-	./bin/run_tests.py
+	./utils/run_tests.py
 
 docs-api:
-	./bin/make_documentation.sh
+	./utils/make_documentation.sh
 
 clean:
-	rm -rf build dist concurrent_tree_crawler.egg-info docs-api tmp
+	rm -rf build dist concurrent_tree_crawler.egg-info docs-api tmp MANIFEST
