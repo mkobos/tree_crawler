@@ -7,7 +7,7 @@ install: clean
 	./setup.py install --user
 
 uninstall:
-	pip concurrent_tree_crawler
+	pip uninstall concurrent_tree_crawler
 
 test:
 	./utils/run_tests.py
