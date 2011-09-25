@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 
 from setuptools import setup, find_packages
+from concurrent_tree_crawler.common.version import get_git_version
 
 setup(
     name='concurrent_tree_crawler',
-    version='0.7.1',
+    version=get_git_version(),
     author='Mateusz Kobos',
     author_email='mateusz@mkobos.com',
     packages=find_packages(),

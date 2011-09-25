@@ -5,3 +5,4 @@
 *.pyc
 *~
 /concurrent_tree_crawler.egg-info
+/RELEASE-VERSION
