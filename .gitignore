@@ -1,4 +1,8 @@
 /tmp
 /docs-api
+/dist
+/MANIFEST
 *.pyc
 *~
+/concurrent_tree_crawler.egg-info
+/RELEASE-VERSION
