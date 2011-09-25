@@ -15,5 +15,5 @@ echo ""
 echo ""
 echo ""
 echo ""
-./src/run_sample_download_crawler.py
+./bin/run_sample_download_crawler.py
 

@@ -4,3 +4,4 @@
 /MANIFEST
 *.pyc
 *~
+/concurrent_tree_crawler.egg-info

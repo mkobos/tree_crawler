@@ -23,8 +23,8 @@ class CmdLnNavigatorsCreator(AbstractCmdLnNavigatorsCreator):
 		parser.add_argument("source_address", 
 			help="the address of the web site to crawl.")
 		parser.add_argument("--max_pages_per_second", type=float, 
-			help="Maximal number of web pages downloads per second. "\
-				"By default no limit is imposed.")
+			help="Maximal number of web pages downloads per second "\
+				"(a real number). By default no limit is imposed.")
 		self.__levels_creator.fill_parser(parser)
 	
 	def create(self, args, navigators_count):

@@ -1,16 +1,14 @@
 #!/usr/bin/env python
 
-import os
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name='concurrent_tree_crawler',
     version='0.7.1',
     author='Mateusz Kobos',
     author_email='mateusz@mkobos.com',
-    packages=['concurrent_tree_crawler', 
-    	'concurrent_tree_crawler.html_multipage_navigator',
-    	'concurrent_tree_crawler.html_multipage_navigator.cmdln'],
+    packages=find_packages(),
+    include_package_data = True, ## Include non-source code files (which have to be additionally specified in `MANIFEST.in` file)
     scripts=['bin/make_documentation.sh', 'bin/run_sample_crawler.sh',
     	'bin/run_sample_download_crawler.py', 'bin/run_tests.py'],
     url='http://github.com/mkobos/tree_crawler',
@@ -22,4 +20,5 @@ setup(
         "nose",
         "mechanize",
     ],
+    test_suite='nose.collector', ## Add ability to run tests in the code through the setup.py script
 )

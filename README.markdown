@@ -6,13 +6,13 @@ Although the main application domain for this library is using it to crawl a web
 
 **Main use-cases of the library**:
 
-1. Crawling HTML web site with known and fixed tree-like structure. In this approach, the number of tree levels is fixed and each page on a certain tree level has basically the same structure (i.e. it is parsed by the same parser). On each level, the links to the pages of the lower level are not necessarily placed on one page, but can be distributed among many pages. See a sample testing web site [src/crawler/test/data/original_site/issues_1.html][] for an example of such a site.
+1. Crawling HTML web site with known and fixed tree-like structure. In this approach, the number of tree levels is fixed and each page on a certain tree level has basically the same structure (i.e. it is parsed by the same parser). On each level, the links to the pages of the lower level are not necessarily placed on one page, but can be distributed among many pages. See a sample testing web site [concurrent_tree_crawler/test/data/original_site/issues_1.html][] for an example of such a site.
 2. Crawling some other HTML web site with a tree-like structure.
 3. Crawling some other tree-like structure.
 
 For a more detailed information about creating one's own crawler using this library see [http://github.com/mkobos/tree_crawler/wiki][].
 
-[src/crawler/test/data/original_site/issues_1.html]: src/crawler/test/data/original_site/issues_1.html
+[concurrent_tree_crawler/test/data/original_site/issues_1.html]: concurrent_tree_crawler/test/data/original_site/issues_1.html
 [http://github.com/mkobos/tree_crawler/wiki]: http://github.com/mkobos/tree_crawler/wiki
 
 Application features
@@ -25,13 +25,13 @@ Application features
 	- **Handling same node name problem**. Some children of the same parent might have the same name. In case of web crawling, this might happen when the name of the node is based on a name of a link pointing to a web page corresponding to this node, and the there are many links with the same name. This is not desirable, because we assume that every child of a certain parent has different name. This assumption simplifies e.g. web crawling task when for each node we create a directory or a file with the name which is the same as the node name (and of course there cannot be two files with the same name in a single directory). To solve this problem, whenever it seems that a certain tree node has two or more children of the same name, the consecutive children are renamed according to the pattern: `NAME-repetition_1`, `NAME-repetition_2` and so on.
 - Web site crawler-related features:
 	- **Throttling the download speed**. The user can set a maximal number of web pages to be visited by the crawler.
-	- **Handling many linked web pages corresponding to a single tree node**. A part of the library (class [HTMLMultipageNavigator][]) explicitly handles situation when there are many pages corresponding to a single tree node. See a sample testing web site [src/crawler/test/data/original_site/issues_1.html][] for an example of such a site.
+	- **Handling many linked web pages corresponding to a single tree node**. A part of the library (class [HTMLMultipageNavigator][]) explicitly handles situation when there are many pages corresponding to a single tree node. See a sample testing web site [concurrent_tree_crawler/test/data/original_site/issues_1.html][] for an example of such a site.
 	- **Handling the same web page -- different address problem**. Some web sites might be constructed so that the same web page might have a different address when viewed through browsers belonging to two different threads. It might be the case e.g. when each thread has to log in on the web site as a different user and the user name is appended to the address of each web page. As long as the user or the library can give the same name to those pages (see [AbstractPageAnalyzer.get_links()][] function and [PageLinks][] class for technical details), they are regarded by the library as the same page. This is usually pretty simple since the name of the link to the web page is the same even if the addresses differ.
 
-[AbstractTreeNavigator]: src/crawler/abstract_tree_navigator.py
-[HTMLMultipageNavigator]: src/crawler/html_multipage_navigator/tree_navigator.py
-[AbstractPageAnalyzer.get_links()]: src/crawler/html_multipage_navigator/abstract_page_analyzer.py
-[PageLinks]: src/crawler/html_multipage_navigator/abstract_page_analyzer.py
+[AbstractTreeNavigator]: concurrent_tree_crawler/abstract_tree_navigator.py
+[HTMLMultipageNavigator]: concurrent_tree_crawler/html_multipage_navigator/tree_navigator.py
+[AbstractPageAnalyzer.get_links()]: concurrent_tree_crawler/html_multipage_navigator/abstract_page_analyzer.py
+[PageLinks]: concurrent_tree_crawler/html_multipage_navigator/abstract_page_analyzer.py
 
 Concurrent tree crawling algorithm
 ----------------------------------
