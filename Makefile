@@ -15,5 +15,9 @@ test:
 docs-api:
 	./utils/make_documentation.sh
 
+upload:
+	./setup.py sdist upload --quiet
+	./setup.py bdist_egg upload --quiet
+
 clean:
 	rm -rf build dist concurrent_tree_crawler.egg-info docs-api tmp MANIFEST
