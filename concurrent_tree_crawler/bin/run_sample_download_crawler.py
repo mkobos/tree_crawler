@@ -38,5 +38,5 @@ sleep_time_str = ("{}:{}:{}".format(sleep_time[0].hour, sleep_time[0].minute, sl
 	"{}:{}:{}".format(sleep_time[1].hour, sleep_time[1].minute, sleep_time[1].second))
 pages_per_second_download_limit = 4
 
-os.system('python {script_dir}/sample_download_crawler.py -v -v --log_file "{dst_dir}/log.txt" --max_pages_per_second {download_limit} --daily_schedule {activity_start}-{activity_end} "{dst_dir}/state.xml" {website_address} "{dst_dir}/tmp/download" '.format(download_limit=pages_per_second_download_limit, script_dir=script_dir, dst_dir=dst_dir, activity_start=sleep_time_str[1], activity_end=sleep_time_str[0], website_address=website_address))
+os.system('{script_dir}/sample_download_crawler.py -v -v --log_file "{dst_dir}/log.txt" --max_pages_per_second {download_limit} --daily_schedule {activity_start}-{activity_end} "{dst_dir}/state.xml" {website_address} "{dst_dir}/tmp/download" '.format(download_limit=pages_per_second_download_limit, script_dir=script_dir, dst_dir=dst_dir, activity_start=sleep_time_str[1], activity_end=sleep_time_str[0], website_address=website_address))
 print "\nNote that the information printed above about problems during tree exploration is expected. It stems from the fact that some of the pages we want to download from our testing web site are missing."
