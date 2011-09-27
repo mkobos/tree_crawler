@@ -4,16 +4,6 @@ import subprocess
 from setuptools import setup, find_packages
 from concurrent_tree_crawler.common.version import get_git_version
 
-def get_restructuredtext(file_path):
-	"""
-	Convert the C{file_path} markdown file to restructured text.
-	The C{pandoc} program has to be installed for this function to work.
-	
-	@return: converted contents byte string
-	"""
-	return subprocess.check_output(
-		["pandoc", "-p", "--no-wrap", "--from=markdown", "--to=rst", file_path])
-
 setup(
     name='concurrent_tree_crawler',
     version=get_git_version(),
@@ -25,7 +15,7 @@ setup(
     license='MIT-LICENSE.txt',
     description='A generic concurrent tree crawling algorithm with a '\
     	'sample implementation for website crawling.',
-    long_description=get_restructuredtext('README.mkd'),
+    long_description=open('README.rst').read(),
     install_requires=[
         "nose",
         "mechanize",
