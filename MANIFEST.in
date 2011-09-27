@@ -1,5 +1,5 @@
 include MIT-LICENSE.txt
-include README.mkd
+include README.rst
 include TODO.mkd
 include RELEASE-VERSION
 recursive-include utils *
