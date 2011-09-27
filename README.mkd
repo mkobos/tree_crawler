@@ -31,8 +31,8 @@ We will show how to run an example script that uses the library. The script uses
 	1. Download the source of the package from the repository (`git clone https://github.com/mkobos/tree_crawler`)
 	2. In the source's root directory, run the script `concurrent_tree_crawler/bin/run_sample_download_crawler.py`
 2. Using the installed library. Steps:
-	1. Install the `concurrent_tree_crawler` library in your system (by executing e.g. `pip concurrent_tree_crawler`)
-	2. Download the `concurrent_tree_crawler/bin/run_sample_download_crawler.py` and `concurrent_tree_crawler/bin/sample_download_crawler.py` scripts from the source repository, place them in a single directory and run the `run_sample_download_crawler.py` script.
+	1. Install the `concurrent_tree_crawler` library in your system from the PyPi packages repository (e.g. by executing `pip install --user concurrent_tree_crawler` or `easy_install --user concurrent_tree_crawler`)
+	2. Download the [concurrent\_tree\_crawler/bin/run\_sample\_download\_crawler.py](https://raw.github.com/mkobos/tree_crawler/master/concurrent_tree_crawler/bin/sample_download_crawler.py) and [concurrent\_tree\_crawler/bin/sample\_download\_crawler.py](https://raw.github.com/mkobos/tree_crawler/master/concurrent_tree_crawler/bin/sample_download_crawler.py) scripts from the source repository, place them in a single directory and run the `run_sample_download_crawler.py` script.
 
 For a more detailed information about creating one's own crawler using this library see [http://github.com/mkobos/tree_crawler/wiki][].
 
@@ -48,9 +48,13 @@ For a more detailed information about the generic algorithm see [http://github.c
 
 Project files and directory structure
 =====================================
-- `Makefile` -- The makefile used to manage different tasks related to the source code.
+- `Makefile` -- The makefile used for managing different tasks related to the source code.
 - `utils/run_tests.py` script runs the unit tests (or alternatively: `make test` or `./setup.py test`) . Unit tests related to a certain source file are placed inside a `test` directory which is placed in the same directory as the source file. This convention was introduced because we want the tests to be placed close to the source files but at the same time we want them not to pollute the source files directory.
 - `utils/make_documentation.sh` script generates API documentation from the source (or alternatively: `make docs-api`)
 - `concurrent_tree_crawler/bin/run_sample_download_crawler.py` script runs a sample crawler that downloads files from a local web site into a temporary directory
 
 The main directory contains also some configuration files for Eclipse and its PyDev plugin which are used to develop the project.
+
+Requirements
+============
+The `pandoc` program has to be installed if you want to create a distribution package (e.g. using the `make` command).
