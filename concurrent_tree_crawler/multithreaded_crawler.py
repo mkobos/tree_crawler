@@ -102,7 +102,7 @@ class MultithreadedCrawler:
 	def __start_tree_saver_thread(self):
 		t = TreeSaverThread(
 			self.__state_file_path, self.__tree, self.__save_period)
-		t.setDaemon(True)
+		t.daemon = True
 		t.start()
 		return t
 

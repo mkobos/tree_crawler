@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-import subprocess
 from setuptools import setup, find_packages
 from concurrent_tree_crawler.common.version import get_git_version
 

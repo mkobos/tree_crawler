@@ -33,7 +33,7 @@ class CrawlersManager:
 			crawler = CrawlerThread(navigator, self.__tree, self.__status_queue)
 			self.__threads.append(crawler)
 		for t in self.__threads:
-			t.setDaemon(True)
+			t.daemon = True
 			t.start()
 
 	def stop(self):

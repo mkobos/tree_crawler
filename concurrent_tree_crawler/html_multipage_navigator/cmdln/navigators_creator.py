@@ -48,6 +48,7 @@ class CmdLnNavigatorsCreator(AbstractCmdLnNavigatorsCreator):
 				self._create_browser_creator(), token_bucket)
 			self.__token_filler = TokenBucketFiller(
 				token_bucket, 1, max_pages_per_second)
+			self.__token_filler.daemon = True
 			self.__token_filler.start()
 		else:
 			browser_creator = self._create_browser_creator()
