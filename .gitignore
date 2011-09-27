@@ -2,6 +2,7 @@
 /docs-api
 /dist
 /MANIFEST
+/build
 *.pyc
 *~
 /concurrent_tree_crawler.egg-info
