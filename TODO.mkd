@@ -1,5 +1,3 @@
-- upload new docs along with the new version of the library (or do not publish the docs at all)
-
 - in the downloading code, handle 404 errors more gently. Place information that given file was not available due to broken link.
 - add more unit tests for different scenarios of algorithm and tree state e.g.:
 	- tree with the root only
@@ -14,6 +12,6 @@
 Documentation
 -------------
 ? generate source docs with sphinx instead of epydoc?
-- In the `docs/tree_exploration_algorithm/text.tex` document,
+- In the `docs/algorithm/index.tex` document,
 	- make a distinction between tree as a data structure shared between the threads and explored tree
 	- describe more precisely the example of the upward update of the state (the last figure).
