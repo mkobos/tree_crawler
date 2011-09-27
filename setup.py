@@ -31,6 +31,7 @@ setup(
         "mechanize",
     ],
     test_suite='nose.collector', ## Add ability to run tests in the code through the setup.py script
+    keywords=["concurrent", "tree", "website", "crawler"],
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Environment :: Console",
