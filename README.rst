@@ -46,7 +46,7 @@ We will show how to run an example script that uses the library. The script uses
 2. Using the installed library. Steps:
    
    1. Install the ``concurrent_tree_crawler`` library in your system from the PyPi packages repository (e.g. by executing ``pip install --user concurrent_tree_crawler`` or ``easy_install --user concurrent_tree_crawler``)
-   2. Download the `concurrent_tree_crawler/bin/run_sample_download_crawler.py <http://raw.github.com/mkobos/tree_crawler/master/concurrent_tree_crawler/bin/run_sample_download_crawler.py>`_ and `concurrent_tree_crawler/bin/sample_download_crawler.py <http://raw.github.com/mkobos/tree_crawler/master/concurrent_tree_crawler/bin/sample_download_crawler.py>`_ scripts from the source repository, place them in a single directory and run the ``run_sample_download_crawler.py`` script (make it first executable if needed).
+   2. Download the `concurrent_tree_crawler/bin/run_sample_download_crawler.py <http://raw.github.com/mkobos/tree_crawler/master/concurrent_tree_crawler/bin/run_sample_download_crawler.py>`_ and `concurrent_tree_crawler/bin/sample_download_crawler.py <http://raw.github.com/mkobos/tree_crawler/master/concurrent_tree_crawler/bin/sample_download_crawler.py>`_ scripts from the source repository, place them in a single directory and run the ``run_sample_download_crawler.py`` script (but before that, make the scripts executable if needed).
 
 
 For a more detailed information about creating one's own crawler using this library see `http://github.com/mkobos/tree\_crawler/wiki <http://github.com/mkobos/tree_crawler/wiki>`_.

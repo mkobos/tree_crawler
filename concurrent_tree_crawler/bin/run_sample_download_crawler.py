@@ -11,7 +11,7 @@ def set_path_to_package_root():
 	Calling this function esures that: 1) if this script is placed inside
 	the C{concurrent_tree_crawler} package files, when importing the 
 	C{concurrent_tree_crawler} package it uses these package files, 
-	2) otherwise, in situtation when the script is in some other place and
+	2) otherwise, in situation when the script is in some other place and
 	we want to use the library C{concurrent_tree_crawler} installed in the
 	system, it uses this library when importing the C{concurrent_tree_crawler}.
 	"""
@@ -23,7 +23,7 @@ set_path_to_package_root()
 def get_website_address():
 	"""
 	This function is used to fetch the path to the location of the sample 
-	website from the package.
+	web site from the package.
 	"""
 	import concurrent_tree_crawler
 	package_path = os.path.dirname(concurrent_tree_crawler.__file__)
