@@ -28,7 +28,7 @@ class DirTreeComparerTestCase(unittest.TestCase):
 			os.path.join("data/dir_tree_comparer", dir_name))
 		ret = are_dir_trees_equal(
 			os.path.join(path, "01"), 
-			os.path.join(path, "02"))
+			os.path.join(path, "02"), ignore=[".gitignore"])
 		if should_be_equal:
 			self.assertTrue(ret)
 		else:

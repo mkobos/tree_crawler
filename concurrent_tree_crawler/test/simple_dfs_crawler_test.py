@@ -14,12 +14,14 @@ class SimpleDFSCrawlerTestCase(unittest.TestCase):
 	def test_website_download(self):
 		with TempDir() as temp_dir:
 			levels = LevelsCreator(temp_dir.get_path()).create()
-			address = "file://"+Resources.path(__file__, 
-				"data/original_site-without_broken_links/issues_1.html")
+			address = "file:"+Resources.path(__file__, 
+				"data/original_site-without_broken_links/issues_1.html",
+				convert_to_url=True)
 			navigator = HTMLMultipageNavigator(address, levels)
 			crawler = SimpleDFSCrawler(navigator)
 			crawler.run()
 			expected_dir = Resources.path(__file__, 
 				"data/expected_download-without_broken_links")
 			actual_dir = temp_dir.get_path()
-			self.assert_(are_dir_trees_equal(expected_dir, actual_dir))
+			self.assert_(are_dir_trees_equal(expected_dir, actual_dir, 
+				ignore=[".gitignore"]))
