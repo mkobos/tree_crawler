@@ -46,7 +46,8 @@ class DownloadTestCase(unittest.TestCase):
 			crawler.run()
 			expected_dir = Resources.path(__file__, "data/expected_download")
 			actual_dir = temp_dir.get_path()
-			self.assert_(are_dir_trees_equal(expected_dir, actual_dir))
+			self.assert_(are_dir_trees_equal(expected_dir, actual_dir, 
+					ignore=[".gitignore"]))
 			self.__check_tree_final_state(tree.get_root())
 			self.__check_if_each_node_is_processed_once(
 				tree.get_root(), {"/root/2011-07-16/06": 0})
@@ -145,7 +146,8 @@ class DownloadTestCase(unittest.TestCase):
 			end = time.time()
 			expected_dir = Resources.path(__file__, "data/expected_download")
 			actual_dir = temp_dir.get_path()
-			self.assert_(are_dir_trees_equal(expected_dir, actual_dir))
+			self.assert_(are_dir_trees_equal(expected_dir, actual_dir, 
+					ignore=[".gitignore"]))
 			self.__check_tree_final_state(sentinel.get_child("root"))
 			self.__check_if_each_node_is_processed_once(
 				sentinel.get_child("root"), {"/root/2011-07-16/06": 0})

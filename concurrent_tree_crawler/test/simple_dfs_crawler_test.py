@@ -23,4 +23,5 @@ class SimpleDFSCrawlerTestCase(unittest.TestCase):
 			expected_dir = Resources.path(__file__, 
 				"data/expected_download-without_broken_links")
 			actual_dir = temp_dir.get_path()
-			self.assert_(are_dir_trees_equal(expected_dir, actual_dir))
+			self.assert_(are_dir_trees_equal(expected_dir, actual_dir, 
+				ignore=[".gitignore"]))
