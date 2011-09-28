@@ -36,8 +36,9 @@ class DownloadTestCase(unittest.TestCase):
 #		try:
 		with TempDir() as temp_dir:
 			levels = LevelsCreator(temp_dir.get_path()).create()
-			address = "file://"+\
-				Resources.path(__file__, "data/original_site/issues_1.html")
+			address = "file:"+\
+				Resources.path(__file__, "data/original_site/issues_1.html",
+							convert_to_url=True)
 			tree = TreeAccessor(_StandardNodeExtended())
 			navigator = HTMLMultipageNavigator(address, levels)
 			navigator_wrapper = _NavigatorTreeWrapperExtended(navigator, tree)
@@ -53,15 +54,17 @@ class DownloadTestCase(unittest.TestCase):
 #			pass
 	
 	def test_multithreaded_download(self):
-		address = "file://"+\
-			Resources.path(__file__, "data/original_site/issues_1.html")
+		address = "file:"+\
+			Resources.path(__file__, "data/original_site/issues_1.html",
+						convert_to_url=True)
 		for threads_no in [1, 2, 3, 4, 50]:
 			self.__check_download(threads_no, address)
 	
 	def test_throttled_download(self):
 #		Logger.start(logging_level=logging.DEBUG)
-		address = "file://"+\
-			Resources.path(__file__, "data/original_site/issues_1.html")
+		address = "file:"+\
+			Resources.path(__file__, "data/original_site/issues_1.html",
+						convert_to_url=True)
 		web_pages_no = 34
 		max_page_opens_per_second = 15
 		min_seconds_taken = float(web_pages_no)/max_page_opens_per_second

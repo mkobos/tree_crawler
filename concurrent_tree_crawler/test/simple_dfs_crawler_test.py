@@ -14,8 +14,9 @@ class SimpleDFSCrawlerTestCase(unittest.TestCase):
 	def test_website_download(self):
 		with TempDir() as temp_dir:
 			levels = LevelsCreator(temp_dir.get_path()).create()
-			address = "file://"+Resources.path(__file__, 
-				"data/original_site-without_broken_links/issues_1.html")
+			address = "file:"+Resources.path(__file__, 
+				"data/original_site-without_broken_links/issues_1.html",
+				convert_to_url=True)
 			navigator = HTMLMultipageNavigator(address, levels)
 			crawler = SimpleDFSCrawler(navigator)
 			crawler.run()

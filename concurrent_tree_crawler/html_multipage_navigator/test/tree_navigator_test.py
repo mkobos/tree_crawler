@@ -7,7 +7,7 @@ from concurrent_tree_crawler.html_multipage_navigator.sample_page_analyzer \
 
 class HTMLMultipageNavigatorTestCase(unittest.TestCase):
 	def test_simple_browsing(self):
-		navigator = HTMLMultipageNavigator("file://"+Resources.path(__file__, 
+		navigator = HTMLMultipageNavigator("file:"+Resources.path(__file__, 
 			"../../test/data/original_site/issues_1.html", convert_to_url=True),
 			LevelsCreator(None).create())
 		navigator.start_in_root()
