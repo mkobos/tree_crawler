@@ -3,7 +3,7 @@ About
 
 This project is a Python library which implements a generic concurrent tree-crawling algorithm. In practice, it can be used in tasks that require a couple of crawling threads to explore a tree-like structure e.g. when downloading documents from a hierarchical web site.
 
-This documents contains a quite high-level description of the library. Apart from it, there are some documents placed on `http://github.com/mkobos/tree\_crawler/wiki <http://github.com/mkobos/tree_crawler/wiki>`_ which deal with some more detailed issues:
+This document contains a quite high-level description of the library. Apart from it, there are some documents placed on `http://github.com/mkobos/tree\_crawler/wiki <http://github.com/mkobos/tree_crawler/wiki>`_ which deal with some more detailed issues:
 
 - design of the library and creating one's own crawler using the library,
 - description of the concurrent tree crawling algorithm.
