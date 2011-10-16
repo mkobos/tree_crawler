@@ -3,11 +3,15 @@ About
 
 This project is a Python library which implements a generic concurrent tree-crawling algorithm. In practice, it can be used in tasks that require a couple of crawling threads to explore a tree-like structure e.g. when downloading documents from a hierarchical web site.
 
-Although the main application domain for this library is using it to crawl a web site with known tree-like structure, one of its main design goals was flexibility in adjusting it to different application areas. The library was consciously developed to be useful in the following 3 cases. These cases are listed here from the least to the most general (and from the one requiring the least implementation effort from the user of the library to the one requiring the most of it).
+This documents contains a quite high-level description of the library. Apart from it, there are some documents placed on `http://github.com/mkobos/tree\_crawler/wiki <http://github.com/mkobos/tree_crawler/wiki>`_ which deal with some more detailed issues:
+
+- design of the library and creating one's own crawler using the library,
+- description of the concurrent tree crawling algorithm.
 
 Main use-cases of the library
 -----------------------------
 
+Although the main application domain for this library is using it to crawl a web site with known tree-like structure, one of its main design goals was flexibility in adjusting it to different application areas. The library was consciously developed to be useful in the following 3 cases. These cases are listed here from the least to the most general (and from the one requiring the least implementation effort from the user of the library to the one requiring the most of it).
 
 1. Crawling HTML web site with known and fixed tree-like structure. In this approach, the number of tree levels is fixed and each page on a certain tree level has basically the same structure (i.e. it is parsed by the same parser). On each level, the links to the pages of the lower level are not necessarily placed on one page, but can be distributed among many pages. See a sample testing web site ``concurrent_tree_crawler/test/data/original_site/issues_1.html`` for an example of such a site.
 2. Crawling some other HTML web site with a tree-like structure.
